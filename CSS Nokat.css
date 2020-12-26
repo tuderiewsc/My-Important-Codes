@@ -1,0 +1,9 @@
+.pre-content {
+        overflow: hidden;
+        max-width: 100%;
+        min-height: 120px;
+        white-space: break-spaces;
+        word-break: keep-all;
+        text-align: left;
+        direction: ltr;
+    }
