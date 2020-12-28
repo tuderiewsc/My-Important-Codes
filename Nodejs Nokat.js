@@ -157,4 +157,22 @@ static async createUserReport(data) {
     return await usersFormsCollection.save({ ...data, type: 'report', date: Date.now() });
   }
   
-  
+  // schema
+<script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": "<%= product.name %>",
+            "image": <%- JSON.stringify(product.media_list || []) %>,
+            "description": "<%- product.desc || '' %>",
+            "sku": "<%- sku %>",
+            "offers": {
+                "@type": "Offer",
+                "url": "<%- fullUrl %>",
+                "priceCurrency": "IRT",
+                "price": "<%- product.price || 0 %>",
+                "priceValidUntil": "<%- d_3month_later %>",
+                "availability": "<%- product.InStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' %>"
+            }
+        }
+    </script>
