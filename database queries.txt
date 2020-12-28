@@ -1,0 +1,87 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use DB;
+use App\test_model;
+
+class database_controller extends Controller
+{
+	public function index()
+	{
+		/////////////////select////////////////////
+		    	// $data= DB::select('select * from test_models where id=?',[1]);
+    	// return dd($data);
+		/////////////////select////////////////////
+
+		/////////////////insert////////////////////
+		// $data=array(
+		// 	"username" => "user1",
+		// 	"password" => "111",
+		// 	"email" => "wizard@gmail.com"
+		// );
+		// $insert= test_model::create($data);
+		// if ($insert) {
+		// 	return 'success';
+		// }else {
+		// 	return 'fail';
+		// }
+		/////////////////insert////////////////////
+
+		/////////////////update////////////////////
+			// $update= DB::update('update test_models set username = ? where id = ?', ['John',4]);
+		// if ($update) {
+		// 	return 'success';
+		// }else {
+		// 	return 'fail';
+		// }
+		/////////////////update////////////////////
+
+		/////////////////delete////////////////////
+		// $delete= DB::delete('delete from test_models where id = ?', [5]);
+		// return $delete;
+		/////////////////delete////////////////////
+
+
+
+		/////////////////others////////////////////
+		// $statement= DB::statement('drop table test');
+		// if ($statement) {
+		// 	return 'drop ok';
+		// }else {
+		// 	return 'drop failed';
+		// }
+
+// DB::transaction(function () {
+//     DB::table('test_models')->where('id',6)->update(['username'=>'ali']);
+// });
+
+
+		// $row= DB::table('test_models')->where('id',6)->first();
+		// return $row->username;
+
+		// $email_list= DB::table('test_models')->pluck('email');
+		// return dd($email_list);
+
+		// $count= DB::table('test_models')->count();
+		// return dd($count);
+
+		// $vars= DB::table('test_models')->where('email','=','tes@sfs.com')->get();
+		// return $vars;
+		// $vars= DB::table('test_models')->where('id','>','3')->get();
+		// return dd($vars);
+		// $vars= DB::table('test_models')->where('username','like','a%')->get();
+		// return dd($vars);
+		// 	$vars= DB::table('test_models')->where('username','like','a%')->get(['username']);
+		// return dd($vars);
+			//$row_delete= DB::table('test_models')->where('email','like','c%')->delete();
+		/////////////////others////////////////////
+
+
+
+
+
+
+	}
+}
