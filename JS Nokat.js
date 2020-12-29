@@ -62,5 +62,8 @@ $(document).ready(function () {
                 }
             });
 
+
+            this.meta_keyword.splice(index, 1); // remove from array
+
 			 
 })
