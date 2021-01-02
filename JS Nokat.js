@@ -187,6 +187,11 @@ function copyToClipboard(element) {
 		})
 	};
 	$('.digits').digits();
+	
+	
+	// Multi Checkbox Table
+	$('table#tbl_categories').simpleCheckboxTable();
+
 
 	  
 })

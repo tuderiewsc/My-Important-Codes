@@ -7,3 +7,100 @@
         text-align: left;
         direction: ltr;
     }
+	
+ /* Typewriter	*/
+ .typewriter {
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  border-right: 0 solid #fff;
+  /* The typwriter cursor */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  margin: 0 auto;
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0;
+  /* Adjust as needed */
+  animation: typing 5.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: orange;
+  }
+}
+ /* Typewriter	*/
+
+
+
+
+/* Menu_Bar */
+<input type="checkbox" id="check" class="checkbox" checked="" hidden="">
+<div class="menu_bar">
+		<label for="check" class="menu">
+			<div class="menu-line menu-line-1"></div>
+			<div class="menu-line menu-line-2"></div>
+			<div class="menu-line menu-line-3"></div>
+		</label>
+</div>
+		
+nav .menu_bar {
+  width: 30px;
+  height: 40px;
+  margin: auto 30px;
+}
+nav .menu_bar .menu {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+}
+nav .menu_bar .menu-line {
+  width: 100%;
+  height: 3px;
+  margin-top: 8px;
+  background-color: #eee;
+  transition: all 0.2s 0.2s;
+  -webkit-transition: all 0.2s 0.2s;
+  -moz-transition: all 0.2s 0.2s;
+  -o-transition: all 0.2s 0.2s;
+  -ms-transition: all 0.2s 0.2s;
+  -webkit-transform-origin: right;
+  transform-origin: right;
+}
+nav .checkbox:checked ~ .menu_bar .menu {
+  -webkit-transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+nav .checkbox:checked ~ .menu_bar .menu-line-1 {
+  -webkit-transform: rotateZ(-45deg);
+  transform: rotateZ(-45deg);
+}
+nav .checkbox:checked ~ .menu_bar .menu-line-2 {
+  opacity: 0;
+}
+nav .checkbox:checked ~ .menu_bar .menu-line-3 {
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+
+/* Menu_Bar */
