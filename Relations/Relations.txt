@@ -1,0 +1,102 @@
+--------------------------
+::Laravel::
+<Internal>
+Category Model:
+public function getParent()
+{
+	return $this->hasOne(Category::class, 'id', 'parent_id')
+		->withDefault(['name' => '---']);
+}
+
+public function getChild()
+{
+	return $this->hasMany(Category::class, 'parent_id');
+}
+	
+controller <=> Category::with('getChild')->where('parent_id',0)->get();	
+blade <=> $menu->getChild->count();	
+
+<1 to 1>
+Category Model:
+public function book()
+{
+	return $this->hasOne(Book::class);
+}
+Book Model:
+public function category()
+{
+  return $this->belongsTo(Category::class);
+}
+blade <=> $book->category['name']	
+
+<1 to Many>
+User Model:
+public function role()
+{
+	return $this->belongsTo(role::class);
+}
+
+<Many to Many>
+Video Model:
+public function categories()
+{
+	return $this->belongsToMany(Category::class);
+}
+	
+CategoryVideo Model:
+class CategoryVideo extends Model
+{
+    //
+}
+
+Category Model:
+public function videos()
+{
+	return $this->belongsToMany(Video::class);
+}
+
+blade <=> foreach($video->categories()->pluck('name') as $cat  )
+---------------------------
+::Flask::
+<1 to Many>
+class User(db.Model):
+    id = db.Column(db.Integer , primary_key=True)
+    name = db.Column(db.String(80))
+
+    # def __repr__(self):
+    # return self.name
+class Writer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+class Book(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    writer_id = db.Column(db.Integer(), db.ForeignKey("writer.id"))
+    writer = db.relationship("Writer", backref=db.backref("books"))
+
+<Many to Many>
+posts_categories = Table('posts_categories', db.metadata,
+    Column('post_id', Integer, ForeignKey('posts.id', ondelete='cascade')),
+    Column('category_id', Integer, ForeignKey('categories.id', ondelete='cascade'))
+)
+class Category(db.Model):
+    __tablename__ = 'categories'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(128), nullable=False, unique=True)
+    description = Column(String(256), nullable=True, unique=False)
+    slug = Column(String(128), nullable=False, unique=True)
+    posts = db.relationship('Post', secondary=posts_categories, back_populates='categories')
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = Column(Integer, primary_key=True)
+    title = Column(String(128), nullable=False, unique=True)
+    summary = Column(String(256), nullable=True, unique=False)
+    content = Column(Text, nullable=False, unique=False)
+    slug = Column(String(128), nullable=False, unique=True)
+    categories = db.relationship('Category', secondary=posts_categories, back_populates='posts')
+
+
+
+
+
+
