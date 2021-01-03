@@ -245,4 +245,114 @@ public function sitemap(){
 <div style="margin:0 auto;text-align: center">{!! $books->onEachSide(5)->links() !!}</div>
 
 
+public function upload(Request $request){
+        if(! empty($_FILES['video']['name'])){
+            $file = $request->video;
+            $filename = $_FILES['video']['name'];
+            $filetype = $_FILES['video']['type'];
+            $filetemp = $_FILES['video']['tmp_name'];
 
+            $filename = microtime() . '-' . $file->getClientOriginalName();
+            $file = $file->move(public_path().'\uploads\videos', $filename);
+            if($file){
+                if (session()->has('videoID')){
+                    $id = session()->get('videoID');
+                    $video = Video::find($id);
+                    $array = [];
+                    $video->update(array_merge($array, ['video'=>$filename]));
+                }
+                return 'آپلود موفق';
+            }else{
+                return 'خطا در آپلود';
+            }
+        }
+    }
+	
+	
+	        $password= Hash::make($request->password , ['rounds'=>12]);
+
+            return back()->with('delete_success', 'آیتم با موفقیت پاک شد.');
+
+
+	 $spec = ProductData::findorfail($id);
+        $data = [];
+        $data['title'] = $spec->title;
+        $data['product_id'] = $spec->product_id;
+        $data['spec_id'] = $spec->id;
+        echo json_encode($data);
+
+
+
+public function cat_bulk_delete(Request $request){
+        $counter = 0;
+        $catLength = 0;
+        foreach (json_decode($request['ids']) as $data => $value)
+        {
+            $counter++;
+            $cats = Category::where('id', $value);
+            $res = $cats->delete();
+            if ($res){
+                $catLength++;
+            }
+        }
+        if ($counter === $catLength){
+            echo 1;
+            Toastr::success('delete success');
+        }else{
+            echo 0;
+        }
+
+    }
+
+
+            return response(json_encode('حذف موفق'));
+			
+			
+			    $array[0] = $cat->id;
+                foreach ($catChilds as $key => $value) {
+                    $array[$key + 1] = $value->id;
+                }
+                $products = Product::whereIn('category_id', $array)->orderBy($col, $sort)->paginate($paginate);
+
+
+if(strpos($str,"'") === false){
+            $phrase = $str;
+        }else{
+            $phrase = preg_replace("/[']/", "", $str);
+        }
+		
+		
+		
+		use App\Mail\ContactUsMail;
+		        Mail::to('wizard2070@gmail.com')
+            ->send(new ContactUsMail($user, $name, $email, $message));
+
+
+
+			$product_ids = [];
+            foreach ($user_products as $user_product){
+                array_push($product_ids, $user_product->product_id);
+            }
+
+
+$user_ip = request()->ip();
+
+
+@extends('site.layouts.master')
+
+@section('keywords', 'Shop, market, category')
+@section('description', 'جستجوي محصولات فروشگاه')
+
+@section('title')
+    جستجو در سايت
+@endsection
+
+
+
+@if(isset($message))
+  {!! $message !!}
+@endif
+
+
+        @if(sizeof($videos) != 0 )  
+		@if (count($product->product_galleries) >0)
