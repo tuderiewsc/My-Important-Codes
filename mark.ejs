@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <title><%= title + ' | ' + 'آی سی Isee - موتور جستجوی قطعات الکترونیکی' %></title>
+    <%- include('../partials/products_head') %>
+</head>
+
+
+<body >
+<section>
+    <header>
+        <%- include('../partials/products_header', {rootCategories: rootCategories , sitesCount: sitesCount}); %>
+    </header>
+
+    <main style="margin-top: 75px;" class="scrollpane">
+        <div id="back_cover"></div>
+
+        <div class="container-fluid w-100">
+            <div class="row my-4">
+                <div class="col-md-3 col-sm-12">
+                    <div class="sidebar desktop_open">
+                        <div id="accordion">
+                            <!-- <div class="card">
+                                <div class="card-header" id="headingFour">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                            فیلترهای فعال <i class="material-icons">keyboard_arrow_up</i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <ul class="products_filters_list">
+                                                <li><span class="text-right">filter1 <i class="material-icons close_filter_tag">close</i></span></li>
+                                                <li><span>filter2 <i class="material-icons close_filter_tag">close</i></span></li>
+                                                <li><span>filter2 <i class="material-icons close_filter_tag">close</i></span></li>
+                                                <li><span>filter2 <i class="material-icons close_filter_tag">close</i></span></li>
+                                                <li><span>filter2 <i class="material-icons close_filter_tag">close</i></span></li>
+                                                <li><span>filter2 <i class="material-icons close_filter_tag">close</i></span></li>
+                                                <li><span>filter2 <i class="material-icons close_filter_tag">close</i></span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="card sidebar_collapse">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                            قیمت (تومان) <i class="material-icons">keyboard_arrow_up</i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+                                    <div class="card-body">
+                                        <div class="row d-flex justify-content-around my-2">
+                                            <input type="text" class="form-control col-5" placeholder="از "
+                                                   onkeyup="this.value = this.value.replace(/[^۱۲۳۴۵۶۷۸۹]+[^\d]/g, '');"
+                                                   id="min-price-input">
+                                            <input type="text" class="form-control col-5" placeholder="تا "
+                                                   onkeyup="this.value = this.value.replace(/[^۱۲۳۴۵۶۷۸۹]+[^\d]/g, '');"
+                                                   id="max-price-input">
+                                        </div>
+                                        <button class="btn btn-danger btn-block mt-3" onclick="setPriceFilter()">فیلتر
+                                            قیمت</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card sidebar_collapse">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#collapseTwo" aria-expanded="true"
+                                                aria-controls="collapseTwo">
+                                            وضعیت کالا <i class="material-icons">keyboard_arrow_up</i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                                >
+                                    <div class="card-body text-right">
+                                        <label class="pure-material-checkbox">
+                                            <input type="checkbox" id="instock-input"
+                                                   onchange="inStockFilterChanged()">
+                                            <span>کالاهای موجود</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card sidebar_collapse">
+                                <div class="card-header" id="headingFour">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                            شهر <i class="material-icons">keyboard_arrow_down</i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour">
+                                    <div id="cities_search_container">
+                                        <input type="text" class="form-control my-2" id="cities_search" placeholder="جستجوی شهر...">
+                                        <i class="material-icons align-middle" id="cities_search_icon">search</i>
+                                    </div>
+                                    <div class="card-body text-right">
+                                        <label for="select_city" style="display: none;">انتخاب شهر:</label>
+                                        <div id="select_city"><div class="form-check"></div></div>
+                                        <button class="btn btn-danger btn-block mt-2" onclick="selectCities()">فیلتر شهر</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#sitesCollapse" aria-expanded="true"
+                                                aria-controls="sitesCollapse">
+                                            سایت ها <i class="material-icons">keyboard_arrow_up</i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="sitesCollapse" class="collapse show" aria-labelledby="headingThree">
+                                    <div id="shops_search_container">
+                                        <input type="text" class="form-control my-2" id="shops_search" placeholder="جستجوی فروشگاه...">
+                                        <i class="material-icons align-middle" id="shops_search_icon">search</i>
+                                    </div>
+                                    <div class="card-body text-right">
+                                        <div class="form-check">
+                                            <label class="pure-material-checkbox blue" for="sitesFilterCheckBox-all">
+                                                <input type="checkbox" id="sitesFilterCheckBox-all" checked>
+                                                <span>همه سایت ها</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12" id="main_content">
+                    <div class="filter_container">
+                        <nav aria-label="breadcrumb" id="breadcrumb_nav">
+                            <div class="row filter_buttons">
+                                <i class="material-icons align-middle mx-2 text-muted">sort</i>
+                                <span class="filter_title">مرتب سازی بر اساس:</span>
+                                <div class="sort_btns filter_buttons_container">
+                                    <button class="btn btn-primary fresh active" onclick="changeSortBy(null)" data-target="">بهترین تطابق</button>
+                                    <button class="btn btn-light cheapest" onclick="changeSortBy('cheapest')" data-target="cheapest">ارزان ترین</button>
+                                    <button class="btn btn-light most_expensive" onclick="changeSortBy('most_expensive')" data-target="most_expensive">گران ترین</button>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+
+                    <div class="products_list d-flex justify-content-center">
+                        <div class="products_cards" id="results">
+                            <% for (var i = 0; i < productsList.result.length; i++) { %>
+                            <div class="card">
+                                <a href="/products/<%=productsList.result[i]._key %>/<%= (productsList.result[i].name) %>"
+                                   title="<%= productsList.result[i].name %>">
+                                    <div class="card-header">
+                                        <!-- when no image is available -->
+                                        <% var image = productsList.result[i].featured_image || productsList.result[i].media_list[0]; %>
+                                        <div class="img_container">
+                                            <% if(image){ %>
+                                                <img src="<%= image.startsWith('http') ? image : '/api/v1/files/' + image %>"
+                                                     alt="<%= productsList.result[i].name %>"><br>
+                                            <% }else { %>
+                                                <img src="/assets/images/noimage.png" class="no-image"><br>LOADING
+                                                IMAGES
+                                            <% } %>
+                                        </div>
+                                        <%
+                                            let original_name = productsList.result[i].name.toUpperCase();
+                                            let sq = convNonEngNums2Eng(search_query);
+                                            let new_name = '<span class="highlight_text">'+ sq +'</span>';
+                                            let replace_name = original_name.replace(sq , new_name );
+                                        %>
+                                        <h6 class="partNameBold"><%- replace_name %></h6>
+                                    </div>
+                                </a>
+                                <div class="card-body">
+                                    <!-- if product is in multi shops-->
+                                    <div class="product_price_multiShop my-1">
+                                        <% if (productsList.result[i].computed) { %>
+                                            <% var min_price = productsList.result[i].computed.min_price; %>
+                                            <p
+                                                    class="product_price  <%- !min_price ? "empty" : "digits" %> <%- productsList.result[i].computed.count_sites == 1 ? "single-price" : "" %>">
+                                                <span><%= min_price || 'بدون قیمت' %></span>
+                                            </p>
+                                        <% } else { %>
+                                            <p class="product_price empty"><span>قیمت محاسبه نشده </span>
+                                            </p>
+                                        <% } %>
+                                    </div>
+                                    <div class="product_status">
+                                        <div class="availabality" style="margin-top: 50px;">
+                                            <!-- if product is not availabale -->
+                                            <% if (productsList.result[i].computed) { %>
+                                                <% if (!productsList.result[i].computed.cnt_inStock) { %>
+                                                    <span class="text-danger"><i class="material-icons align-middle text-danger">remove_circle</i>ناموجود</span>
+                                                <% } else { %>
+                                                    <span class="text-success"><i class="material-icons align-middle text-success">check_circle</i>موجود</span>
+                                                <% } %>
+                                            <% } %>
+                                            <!-- if product is not availabale -->
+                                        </div>
+                                    </div>
+                                    <!-- if product is in multi shops-->
+                                </div>
+                                <div class="card-footer">
+                                    <div class="product_price_multiShop my-1">
+                                        <i class="material-icons align-middle mx-2">store</i>
+                                        <!--<p class="product_price_shop_count"><span>2</span></p>-->
+                                        <% if (productsList.result[i].computed) { %>
+                                            <% if (productsList.result[i].computed.count_sites != 1 || !productsList.result[i].computed.ssc_name) { %>
+                                                <p class="product_price_shop_count text-muted">
+                                                    <span><%= productsList.result[i].computed.count_sites %></span>
+                                                </p>
+                                            <% } else { %>
+                                                <p class="product_price_shop_name text-muted">
+                                                    <span><%= productsList.result[i].computed.ssc_name %></span>
+                                                </p>
+                                            <% } %>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                            <% for (var i = 0; i < freeCrawledProductsList.result.length; i++) { %>
+                            <div class="card">
+                                <a href="/nc-products/<%=freeCrawledProductsList.result[i].cpdl_id %>/<%= encodeURIComponent(freeCrawledProductsList.result[i].name) %>"
+                                   title="<%= freeCrawledProductsList.result[i].name %>">
+                                    <div class="card-header">
+                                        <!-- when no image is available -->
+                                        <div class="img_container">
+                                            <% if(freeCrawledProductsList.result[i].media_list instanceof Array && freeCrawledProductsList.result[i].media_list.length) { %>
+                                                <img src="<%- freeCrawledProductsList.result[i].media_list[0] %>?size=300"><br>
+                                            <% } else { %>
+                                                <img src="/assets/images/noimage.png" class="no-image"><br>
+                                            <% } %>
+                                        </div>
+                                        <%
+                                            let original_name = freeCrawledProductsList.result[i].name.toUpperCase();
+                                            let sq = convNonEngNums2Eng(search_query);
+                                            let new_name = '<span class="highlight_text">'+ sq +'</span>';
+                                            replace_name = original_name.replace(sq , new_name );
+                                        %>
+                                        <h6 class="partNameBold"><%- replace_name %></h6>
+                                    </div>
+                                </a>
+                                <div class="card-body">
+                                    <!-- if product is in multi shops-->
+                                    <div class="product_price_multiShop my-1">
+                                        <% if (freeCrawledProductsList.result[i].price) { %>
+                                            <p class="product_price single-price"><span class="digits">
+                                                    <%= freeCrawledProductsList.result[i].price %>
+                                                </span>
+                                            </p>
+                                        <%} else {%>
+                                            <p class="product_price empty"><span>بدون قیمت</span></p>
+                                        <%}%>
+                                    </div>
+                                    <!-- if product is in multi shops-->
+                                    <div class="product_status">
+                                        <div class="availabality <%= freeCrawledProductsList.result[i].sitePricesAreNotUpToDate ? 'marginTopUpToDatePrice' : 'marginTopAvailability' %>">
+                                            <!-- if product is not availabale -->
+                                            <% if (! freeCrawledProductsList.result[i].stockCount) { %>
+                                                <span class="text-danger"><i class="material-icons align-middle text-danger">remove_circle</i>ناموجود</span>
+                                                <!-- if product is not availabale -->
+                                            <% } else { %>
+                                                <span class="text-success"><i class="material-icons align-middle text-success">check_circle</i>موجود</span>
+                                            <% } %>
+                                        </div>
+                                        <% if (freeCrawledProductsList.result[i].sitePricesAreNotUpToDate) { %>
+                                            <div class="price_availabality">
+                                                <span class="text-danger"><i class="material-icons align-middle text-danger">remove_circle</i>قیمت توسط فروشگاه بروز نشده!</span>
+                                            </div>
+                                        <% } %>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer">
+                                    <div class="product_price_multiShop my-1">
+                                        <i class="material-icons align-middle mx-2">store</i>
+                                        <p class="product_price_shop_name text-muted">
+                                            <span><%= freeCrawledProductsList.result[i].site_name %></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+
+                            <% if((productsList.result.length + freeCrawledProductsList.result.length) == 0){ %>
+                                <p
+                                        style="color: rgb(0, 0, 0);font-weight: bold;font-size: 18px;margin-top: 5%;width: 100%;height: 100%;text-align: center;">
+                                    محصولی یافت نشد</p>
+                            <% } %>
+                        </div>
+                    </div>
+                    <br><br><br><br><br><br><br><br>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- <footer> -->
+    <%- include('../partials/products_footer') %>
+    <!-- </footer> -->
+</section>
+
+
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/jquery-ui.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/axios.min.js"></script>
+<script src="/assets/js/jquery.ez-plus.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/ua-parser.min.js"></script>
+<script src="/assets/js/search.js"></script>
+<script src="/assets/js/wow.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
+<script src="/assets/js/scripts.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // {
+        //     var url = new URL(window.location.href);
+        //     var params = new window.URLSearchParams(window.location.search);
+        //     var filters = JSON.parse(params.get('filters') || "{}");
+        //     $('#search_frm_input').val(filters.search_phrase);
+        // }
+
+
+
+        const faZero = 1776;
+        const faNine = 1785;
+        const arZero = 1632;
+        const arNine = 1641;
+        <%- String(convNonEngNums2Eng) %>;
+        let allSites = <%- JSON.stringify(listOfSites) %>;
+        const initialQueriesSites = <%- JSON.stringify(queriesSites) %>;
+        const searchQuery = <%- JSON.stringify(search_query) %>;
+        const citiesList = <%- JSON.stringify(citiesList) %>;
+
+
+        let markdown_options = {
+            "wildcards": "enabled",
+            "noMatch": function(term){
+                // term is the not found term
+            },
+            "done": function(counter){
+                // counter is a counter indicating the total number of all marks
+            },
+            "debug": false,
+            "log": window.console
+        };
+        $(".products_cards").mark(searchQuery , markdown_options);
+
+
+
+
+        function onSelectedSiteChanged() {
+            $('input[name="selectedSite"]').prop('disabled', true);
+            $('#sitesFilterCheckBox-all').prop('disabled', true);
+            $('#sitesFilterCheckBox-all').prop('checked', false);
+            if (!Array.from(document.querySelectorAll('input[name="selectedSite"]:checked')).length) {
+                $('#sitesFilterCheckBox-all').prop('checked', true);
+            }
+            loadData(true);
+        }
+
+
+        let selectedCityIds;
+        window.selectCities = () => {
+            selectedCityIds = [];
+            $.each($("input[name='selectedCity']:checked"), function () {
+                selectedCityIds.push($(this).val());
+            });
+            if (selectedCityIds.length === 0) {
+                $.each($("input[name='selectedSite']"), function () {
+                    $(this).prop('checked', false);
+                    $('#sitesFilterCheckBox-all').prop('checked', true);
+                });
+            }
+            //console.log('ids: ' + selectedCityIds);
+            $.each($("input[name='selectedSite']"), function () {
+                if (selectedCityIds.indexOf($(this).attr('city_id')) != -1) {
+                    $(this).prop('checked', true);
+                } else {
+                    $(this).prop('checked', false);
+                }
+            });
+            $('#cities_search_icon').click();
+            onSelectedSiteChanged();
+        };
+
+
+        allSites.sort((sA, sB) => {
+            return sA.title.localeCompare(sB.title);
+        });
+
+        function showSitesList(allSites, queriesSites, selectedSitesIds  ) {
+            $('input[name="selectedSite"]').prop('disabled', false);
+            $('#sitesFilterCheckBox-all').prop('disabled', false);
+            const sitesFilteredByQuery = allSites.filter(s => {
+                const sumSQ = initialQueriesSites.filter(sq => sq.siteId == s._key).reduce((s, sq) => s + sq.count, 0);
+                const sumDYSQ = queriesSites.filter(sq => sq.siteId == s._key).reduce((s, sq) => s + sq.count, 0);
+                if (sumDYSQ) {
+                    s._query_count = sumDYSQ;
+                    return true;
+                } else if (sumSQ) {
+                    s._query_count = sumSQ;
+                    return true;
+                } else {
+                    s._query_count = 0;
+                    return false;
+                }
+            });
+            $('#sitesCollapse > .card-body > div > div:not(:first-child)').remove();
+            $('#select_city > option').remove();
+            const sitesCities = sitesFilteredByQuery.map(s => s.city_id);
+            $('#select_city').find('div.form-check').remove();
+            let availableCities = [];
+            citiesList.filter(c => sitesCities.indexOf(c._key) != -1).forEach(function(city,index)  {
+                $('#select_city').append(`
+                <div class="form-check">
+                    <label class="pure-material-checkbox blue selectedCity" for="citiesFilterCheckBox-${city._key}">
+                        <input type="checkbox"
+                        name="selectedCity"
+                        id="citiesFilterCheckBox-${city._key}"
+                        value="${city._key}"
+                        ${(selectedCityIds || []).indexOf(city._key) != -1 ? 'checked' : ''} >
+                        <span>${city.name}</span>
+                    </label>
+                </div>
+                    `);
+                availableCities.push(city.name);
+            });
+
+            // Autocomplete Cities Search
+            $( "#cities_search" ).autocomplete({
+                    source: availableCities,
+                    select: function () {
+                        $('input#cities_search').trigger('input');
+                    }
+                }
+            );
+
+
+            let availableSites = [];
+            for (let i = 0; i < sitesFilteredByQuery.length; i++) {
+                const site = sitesFilteredByQuery[i];
+                $('#sitesCollapse > .card-body > div').append(`
+                    <div class="form-check">
+                        <label class="pure-material-checkbox blue" for="sitesFilterCheckBox-${site._key}">
+                            <input type="checkbox"
+                            name="selectedSite"
+                            id="sitesFilterCheckBox-${site._key}"
+                            value="${site._key}"
+                            city_id="${site.city_id}"
+                            ${(selectedSitesIds || []).indexOf(site._key) != -1 ? 'checked' : ''} >
+                            <span>${site._t} (${site._query_count})</span>
+                        </label>
+                    </div>
+                    `);
+                availableSites.push(site._t);
+            }
+            // Autocomplete Sites Search
+            $( "#shops_search" ).autocomplete({source: availableSites});
+
+
+
+            $('input[name="selectedSite"]').on('change', onSelectedSiteChanged);
+        }
+
+
+        // initial sites
+        showSitesList(allSites, initialQueriesSites);
+
+
+        // begin initialization
+        // preserve filters and options values on load
+        var initialParams = new window.URLSearchParams(window.location.search);
+        if (initialParams.has('filters')) {
+            const filters = JSON.parse(initialParams.get('filters'));
+
+            if (filters.site_id) {
+                $('#sitesFilterCheckBox-all').removeAttr('checked');
+                filters.site_id.split(',').forEach(site_id =>
+                    $(`#sitesFilterCheckBox-${site_id}`).attr('checked', true));
+            }
+
+            if (filters.native_attributes) {
+                if (filters.native_attributes.inStock) {
+                    $('#instock-input').attr('checked', true);
+                }
+
+                if (filters.native_attributes.price) {
+                    if (filters.native_attributes.price.min) {
+                        $('#min-price-input').val(filters.native_attributes.price.min);
+                    }
+
+                    if (filters.native_attributes.price.max) {
+                        $('#max-price-input').val(filters.native_attributes.price.max);
+                    }
+                }
+            }
+        }
+
+
+        if (initialParams.has('sort_by')) {
+            const sortCriteria = initialParams.get('sort_by');
+            $('.sort_btns').find('button.active').removeClass('active btn-primary').addClass('btn-light');
+            const $item = $(`.sort_btns > button.${sortCriteria || 'fresh'}`);
+            $item.addClass('active btn-primary').removeClass('btn-light');
+        }
+
+        // end of initialization
+        $('#sitesFilterCheckBox-all').on('change', () => {
+            //$('input[name="selectedSite"]').prop('disabled', true);
+            //$('#sitesFilterCheckBox-all').prop('disabled', true);
+            if ($('#sitesFilterCheckBox-all').is(':checked')) {
+                $('input[name="selectedSite"]:checked').prop('checked', false);
+                selectedCityIds = [];
+                loadData(true);
+            }
+        });
+
+        $(document).click(function (e) {
+            if ($(e.target).closest('#sortByDropdownMenuButton').length === 0) {
+                $('#sortByDropdownMenuButton').find('i').text('keyboard_arrow_down');
+            }
+        });
+
+        let isLoading = false;
+        let canLoadMoreProducts = true;
+        let canLoadMoreCrawledProducts = true;
+        const limit = 20;
+        // freeCrawledProducts's offset is separate from main offset
+        let fcOffset = <%- freeCrawledProductsList.result.length %> ? 0 : -limit;
+
+        window.changeSortBy = function (sortCriteria) {
+            $('.sort_btns').find('button.active').removeClass('active btn-primary').addClass('btn-light');
+            const $item = $(`.sort_btns > button.${sortCriteria || 'fresh'}`);
+            $item.addClass('active btn-primary').removeClass('btn-light');
+            loadData(true);
+        }
+
+        window.loadData = async function (reload = false) {
+            isLoading = true;
+            const options = {};
+            let queriesSites = [];
+
+            const min = $('#min-price-input').val();
+            const max = $('#max-price-input').val();
+
+            if (min || max) {
+                options.price = {
+                    min: min ? Number(min) : null,
+                    max: max ? Number(max) : null,
+                };
+            }
+
+            options.inStock = document.getElementById('instock-input').checked;
+
+            var $results = $("#results");
+            if (reload) {
+                $results.empty();
+            }
+
+            $(".products_list").after($(`
+                    <div class="loading d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    `).fadeIn('slow')).data("loading", true);
+
+            let productsHtml = '';
+            let freeCrawledProductsHtml = '';
+            let search_phrase;
+            let offset;
+            let selectedSitesIds;
+
+            try {
+                var canLoadCrawledProducts = reload || canLoadMoreCrawledProducts;
+
+                var url = new URL(window.location.href);
+                var params = new window.URLSearchParams(window.location.search);
+                offset = Number(params.get('offset')) || 0;
+                params.set('offset', reload ? 0 : offset + limit);
+
+                const filters = JSON.parse(params.get('filters') || "{}");
+                if (filters) {
+                    search_phrase = filters.search_phrase;
+                    if (reload && (typeof options.inStock !== "undefined" || options.price)) {
+                        filters.native_attributes = filters.native_attributes || {};
+                        if (options.inStock) {
+                            filters.native_attributes.inStock = options.inStock;
+                        } else {
+                            delete filters.native_attributes.inStock;
+                        }
+
+                        if (options.price) {
+                            filters.native_attributes.price = {};
+                            if (options.price.min) {
+                                filters.native_attributes.price.min = options.price.min;
+                            }
+                            if (options.price.max) {
+                                filters.native_attributes.price.max = options.price.max;
+                            }
+                        } else {
+                            delete filters.native_attributes.price;
+                        }
+                    }
+
+                    selectedSitesIds = Array.from(document.querySelectorAll('input[name="selectedSite"]:checked'))
+                        .map(e => $(e).val());
+                    if (reload && selectedSitesIds.length > 0) {
+                        filters.site_id = selectedSitesIds.join(',');
+                    } else if (reload) {
+                        delete filters.site_id;
+                    }
+
+                    params.set('filters', JSON.stringify(filters));
+
+                    // search in crawled ones only if these params are set
+                    // canLoadCrawledProducts = canLoadCrawledProducts && Object.keys(filters).filter(k => [
+                    //     'search_phrase',
+                    //     'native_attributes'
+                    // ].indexOf(k) == -1).length == 0;
+                }
+
+                const sortCriteria = $('.sort_btns button.active').attr('data-target');
+                if (reload && sortCriteria) {
+                    params.set('sort_by', sortCriteria);
+                } else if (reload) {
+                    params.delete('sort_by');
+                }
+
+                url.search = params;
+                url = url.toString();
+                window.history.replaceState({ url: url }, null, url);
+
+                var productsUrl = new URL(url.substr(0, url.lastIndexOf('/')) + '/api/v1/products');
+                productsUrl.search = params;
+
+                const productsList = (reload || canLoadMoreProducts) ? (await axios.get(productsUrl.toString())).data : { result: [] };
+                if (productsList.result.length < limit) {
+                    canLoadMoreProducts = false;
+                }
+
+                if (reload /*&& productsList.result.length != 0*/) {
+                    var params = new window.URLSearchParams(productsUrl.search);
+                    params.set('collect_sites', true);
+                    productsUrl.search = params;
+                    queriesSites.push(...(await axios.get(productsUrl.toString())).data.result);
+                }
+
+                // Cloning for crawled ones
+                canLoadCrawledProducts = canLoadCrawledProducts && (fcOffset >= 0 || !canLoadMoreProducts);
+                var paramsClone = new window.URLSearchParams(window.location.search);
+                var filtersClone = JSON.parse(paramsClone.get('filters') || "{}");
+
+                Object.keys(filtersClone).forEach(k => {
+                    // these are the allowed params
+                    if ([
+                        'search_phrase',
+                        'native_attributes',
+                        'site_id',
+                        'sort_by'
+                    ].indexOf(k) == -1) {
+                        delete filtersClone[k];
+                    }
+                });
+                Object.keys(filtersClone).forEach(k => {
+                    paramsClone.set(k, typeof filtersClone[k] === 'object' ? JSON.stringify(filtersClone[k]) : filtersClone[k]);
+                });
+
+                paramsClone.delete('filters');
+
+                if (canLoadCrawledProducts) {
+                    if (reload) {
+                        fcOffset = 0;
+                    } else {
+                        fcOffset = fcOffset + limit;
+                    }
+                    paramsClone.set('offset', fcOffset);
+                }
+                // end of cloning
+
+                paramsClone.set("optimizeSize", "true");
+
+                var crawledProductsUrl = new URL(url.substr(0, url.lastIndexOf('/')) + '/api/v1/products/crawled/free');
+                crawledProductsUrl.search = paramsClone;
+
+                const freeCrawledProductsList = canLoadCrawledProducts ? (await axios.get(crawledProductsUrl.toString())).data : { result: [] };
+
+                if (freeCrawledProductsList.result.length == 0) {
+                    if (canLoadCrawledProducts) {
+                        canLoadMoreCrawledProducts = false;
+                    }
+                }
+
+                if (reload /*&& freeCrawledProductsList.result.length != 0*/) {
+                    var params = new window.URLSearchParams(crawledProductsUrl.search);
+                    params.set('collect_sites', true);
+                    crawledProductsUrl.search = params;
+                    queriesSites.push(...(await axios.get(crawledProductsUrl.toString())).data.result);
+                }
+
+                productsHtml = productsList.result.map(p => {
+                        const image = p.featured_image || p.media_list[0];
+                        return `
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="/products/${p._key}/${p.name}"title="${p.name}" >
+                                        <!-- when no image is available -->
+                            <div class="img_container">
+                            ${ image ?
+                                `<img src="${image.startsWith('http') ? image : '/api/v1/files/' + image}" alt="${p.name}"><br>`
+                            :
+                            `<img src="/assets/images/noimage.png" class="no-image"><br>`
+                        }
+                    </div>
+                    </a>
+                    <a href="/products/${p._key}/${p.name}" title="${p.name}" ><h6 class="partNameBold">${p.name.toUpperCase().replace(convNonEngNums2Eng(searchQuery) , '<span class="highlight_text">'+convNonEngNums2Eng(searchQuery)+'</span>' )}</h6></a>
+                </div>
+                <div class="card-body">
+                    <!-- if product is in multi shops-->
+                    <div class="product_price_multiShop my-1">
+                    ${ p.computed ?
+                                `
+                        <p class="product_price  ${!p.computed.min_price ? "empty" : "digits"} ${p.computed.count_sites == 1 ? "single-price" : ""}">
+                    <span> ${p.computed.min_price || "بدون قیمت"} </span>
+                    </p>
+
+                        `
+                                :
+                                `
+                    <p class="product_price"><span>قیمت محاسبه نشده </span></p>
+                `
+                            }
+                </div>
+                                    <!-- if product is in multi shops-->
+
+                    <div class="product_status">
+                    <div class="availabality" style="margin-top: 50px;">
+                    ${ p.computed && !p.computed.cnt_inStock ?
+                            `
+                        <span class="text-danger"><i class="material-icons align-middle text-danger">remove_circle</i>ناموجود</span>
+                    `
+                            :
+                            `
+                        <span class="text-success"><i class="material-icons align-middle text-success">check_circle</i>موجود</span>
+                    `
+                        }
+                    </div>
+                    </div>
+                    </div>
+                    <div class="card-footer">
+                    <div class="product_price_multiShop my-1">
+                    ${ p.computed ?
+                                `
+                    ${(p.computed.count_sites != 1 || !p.computed.ssc_name) ?
+                                    `<i class="material-icons align-middle mx-2">store</i> <p class="product_price_shop_count text-muted"><span>${p.computed.count_sites}</span></p>`
+                                    :
+                                    `<i class="material-icons align-middle mx-2">store</i><p class="product_price_shop_name text-muted"><span>${p.computed.ssc_name}</span></p>`
+                }
+            `
+                                :
+                                `
+            <p class="product_price"><span>قیمت محاسبه نشده </span></p>
+            `
+                            }
+                    </div>
+                 </div>
+
+
+
+                            </div>
+                            `;
+        }).join('\n');
+
+
+    freeCrawledProductsHtml = freeCrawledProductsList.result.map(p => {
+        return `
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="/nc-products/${p.cpdl_id}/${encodeURIComponent(p.name)}" title="${p.name}">
+                                        <!-- when no image is available -->
+            <div class="img_container">
+            ${p.media_list instanceof Array && p.media_list.length ? `
+            <img src="${p.media_list[0]}?size=300"><br>
+            `: `<img src="/assets/images/noimage.png" class="no-image"><br>`}
+                                    </a>
+                             </div>
+                                    <a href="/nc-products/${p.cpdl_id}/${encodeURIComponent(p.name)}" title="${p.name}"><h6 class="partNameBold">${p.name.toUpperCase().replace(convNonEngNums2Eng(searchQuery) , '<span class="highlight_text">'+convNonEngNums2Eng(searchQuery)+'</span>' )}</h6></a>
+                                </div>
+                                <div class="card-body">
+                                    <!-- if product is in multi shops-->
+    <div class="product_price_multiShop my-1">
+            ${p.price ?
+                                `<p class="product_price single-price"><span class="digits"> ${p.price} </span></p>`
+                                :
+                                `<p class="product_price empty"><span>بدون قیمت </span></p>`
+                            }
+                                    </div>
+                                    <!-- if product is in multi shops-->
+
+            <div class="product_status">
+            <div class="availabality ${ p.sitePricesAreNotUpToDate ? 'marginTopUpToDatePrice' : 'marginTopAvailability' }">
+            ${ !p.stockCount ?
+                            `
+                <span class="text-danger"><i class="material-icons align-middle text-danger">remove_circle</i>ناموجود</span>
+            `
+                            :
+                            `
+                <span class="text-success"><i class="material-icons align-middle text-success">check_circle</i>موجود</span>
+            `
+                        }
+            </div>
+            <div class="price_availabality">
+            ${ p.sitePricesAreNotUpToDate ?
+                            `
+                <span class="text-danger"><i class="material-icons align-middle text-danger">remove_circle</i>قیمت توسط فروشگاه بروز نشده!</span>
+               `
+                            :
+                            `
+                `
+                        }
+            </div>
+            </div>
+
+
+            </div>
+
+
+
+            <div class="card-footer">
+            <div class="product_price_multiShop my-1">
+            <i class="material-icons align-middle mx-2">store</i>
+            <p class="product_price_shop_name text-muted">
+            <span>${ p.site_name}</span>
+            </p>
+            </div>
+            </div>
+
+            </div>
+            `;
+                    }).join('\n');
+                } catch (e) {
+                    console.error(e.message, e.stack);
+                }
+
+                $(".loading").fadeOut('fast', function () {
+                    $(this).remove();
+                });
+
+                const $res = $(productsHtml + '\n' + freeCrawledProductsHtml);
+                $res.hide();
+                const lastChild = document.querySelector('#results > .card:last-child');
+                $results.append($res);
+                $res.fadeIn();
+                $results.removeData("loading");
+
+                $('.digits').digits();
+
+                setTimeout(() => {
+                    isLoading = false;
+                    // if (lastChild) {
+                    //     lastChild.scrollIntoView();
+                    // }
+                }, 1000);
+
+                if (reload) {
+                    showSitesList(allSites, queriesSites, selectedSitesIds );
+                }
+
+                $(".products_cards").mark(searchQuery , markdown_options);
+            }
+
+
+            let lastScrollY = 0;
+            window.addEventListener('scroll', async (event) => {
+                const diff = window.scrollY - lastScrollY; // scrolling down
+                lastScrollY = window.scrollY;
+
+                if (diff > 0 && (canLoadMoreProducts || canLoadMoreCrawledProducts) && isLoading == false && (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+                    loadData();
+                }
+            });
+
+            var elements = document.querySelectorAll(".site-counts");
+            for (var i = 0; i < elements.length; i++) {
+                if (elements[i].textContent == 0) { elements[i].style.color = "#d10b2c"; }
+            }
+            $('.pagination-inner a').on('click', function () {
+                $(this).siblings().removeClass('pagination-active');
+                $(this).addClass('pagination-active');
+            })
+            $(".collapse.show").each(function () {
+                $(this).prev(".card-header").find(".fa").addClass("fa-angle-up").removeClass("fa-angle-down");
+            });
+
+            $(".collapse").on('show.bs.collapse', function () {
+                $(this).prev(".card-header").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-up");
+            }).on('hide.bs.collapse', function () {
+                $(this).prev(".card-header").find(".fa").removeClass("fa-angle-up").addClass("fa-angle-down");
+            });
+
+            window.inStockFilterChanged = function () {
+                loadData(true);
+            }
+
+            window.setPriceFilter = function () {
+                loadData(true);
+            }
+        });
+    </script>
+
+
+
+
+<%- gtag %>
+</body>
+
+</html>
