@@ -1,3 +1,5 @@
+
+
 # Block WordPress xmlrpc.php requests
 <Files xmlrpc.php>
 order deny,allow
@@ -6,6 +8,12 @@ allow from 123.123.123.123
 </Files>
 
 <?php
+
+
+/* Actions List */
+comment_form
+wp_head
+/* Actions List */
 
 //////////////// for eeeico ///////////
 function encrypt_decrypt($action, $string) {
@@ -109,3 +117,9 @@ add_role( 'buyer', 'Buyer' , array(
 // add_action( 'init', 'wporg_simple_role_caps', 11 );
 
 //////////////// for eeeico ///////////
+
+
+
+define('plugin_dir', plugin_dir_path(__FILE__));
+date_default_timezone_set('Asia/Tehran');
+

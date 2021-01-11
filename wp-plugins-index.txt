@@ -1,0 +1,11 @@
+1=> activation,deactivation,uninstall_hook,log-file,add_option
+2=> search redirect
+5  => related posts
+6  => object oriention
+7  => first settings , add_menu
+9 , 10  => metabox in post editor
+11  => widget , metabox in dashboard
+13  => default wp settings
+14  => metabox settings
+15  => register widget 
+16  => api widget 
