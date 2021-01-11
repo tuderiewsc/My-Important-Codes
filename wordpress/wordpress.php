@@ -126,6 +126,15 @@ the_excerpt
 template_include
 /* Filters List */
 
+/* Globals */
+	$post_id
+	$wp_query
+	$content
+	$pagenow
+	$post_type
+
+/* Globals */
+
 
 define('plugin_dir', plugin_dir_path(__FILE__));
 date_default_timezone_set('Asia/Tehran');
@@ -192,14 +201,19 @@ return $output;
 
 
 if (!validate_username($user_login)) {
-            $hmu_err[] = 'نام کاربری شما صحیح نیست.';
+            $hmu_err[] = 'نام کاربري شما صحيح نيست.';
         }
         if (!is_email($user_email)) {
-            $hmu_err[] = 'ایمیل شما صحیح نمی باشد.';
+            $hmu_err[] = 'ايميل شما صحيح نمي باشد.';
         }
         if (email_exists($user_email)) {
-            $hmu_err[] = 'ایمیل شما قبلا ثبت شده است.';
+            $hmu_err[] = 'ايميل شما قبلا ثبت شده است.';
         }
+		
+		
+		wp_redirect( $location, $status = 302 )
+$localtion = get_permalink( $post = 0, $leavename = false )
+
 	
 	
 	$html = <<<HTML
