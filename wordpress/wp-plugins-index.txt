@@ -1,7 +1,7 @@
 1=> activation,deactivation,uninstall_hook,log-file,add_option
 2=> search redirect
-5  => related posts
-6  => object oriention
+5  => related posts,custom filter
+6  => object oriention (Class)
 7  => first settings , add_menu
 9 , 10  => metabox in post editor
 11  => widget , metabox in dashboard
@@ -9,3 +9,7 @@
 14  => metabox settings
 15  => register widget 
 16  => api widget 
+17  => custom roles 
+19  => add button to text editor
+20  => like posts
+22,23  => cron job

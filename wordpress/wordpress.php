@@ -1,5 +1,3 @@
-
-
 # Block WordPress xmlrpc.php requests
 <Files xmlrpc.php>
 order deny,allow
@@ -10,10 +8,6 @@ allow from 123.123.123.123
 <?php
 
 
-/* Actions List */
-comment_form
-wp_head
-/* Actions List */
 
 //////////////// for eeeico ///////////
 function encrypt_decrypt($action, $string) {
@@ -119,7 +113,98 @@ add_role( 'buyer', 'Buyer' , array(
 //////////////// for eeeico ///////////
 
 
+/* Actions List */
+comment_form
+wp_head
+wp_footer
+/* Actions List */
+
+
+/* Filters List */
+the_content
+the_excerpt
+template_include
+/* Filters List */
+
 
 define('plugin_dir', plugin_dir_path(__FILE__));
 date_default_timezone_set('Asia/Tehran');
 
+
+// Search Redirect
+add_action('template_redirect', 'openPost');
+function openPost()
+{
+  if (is_search()) {
+    global $wp_query;
+    if ($wp_query->post_count == 1 && $wp_query->max_num_pages == 1) {
+      wp_redirect( get_permalink( $wp_query->posts[0]->ID ) );
+      exit;
+    }
+  }
+}
+
+$terms = get_the_terms( get_the_ID(), 'category' );
+          $cats = array();
+          foreach ($terms as $term) {
+            $cats[] = $term->term_id;
+          }
+
+
+    $authorImage = get_avatar( get_the_author_meta( 'email' ) , 32  );
+    $authorName = get_the_author( );
+    $authorDesc = get_the_author_meta( 'description' );
+
+
+	
+function hex2rgba($color, $opacity = false) {
+	$default = 'rgb(0,0,0)';
+	//Return default if no color provided
+	if(empty($color))
+      return $default;
+	//Sanitize $color if "#" is provided
+  if ($color[0] == '#' ) {
+   $color = substr( $color, 1 );
+}
+
+//Check if color has 6 or 3 characters and get values
+if (strlen($color) == 6) {
+    $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
+} elseif ( strlen( $color ) == 3 ) {
+    $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
+} else {
+    return $default;
+}
+        //Convert hexadec to rgb
+$rgb =  array_map('hexdec', $hex);
+        //Check if opacity is set(rgba or rgb)
+if($opacity){
+   if(abs($opacity) > 1)
+      $opacity = 1.0;
+  $output = 'rgba('.implode(",",$rgb).','.$opacity.')';
+} else {
+   $output = 'rgb('.implode(",",$rgb).')';
+}
+        //Return rgb(a) color string
+return $output;
+}
+
+
+
+if (!validate_username($user_login)) {
+            $hmu_err[] = 'نام کاربری شما صحیح نیست.';
+        }
+        if (!is_email($user_email)) {
+            $hmu_err[] = 'ایمیل شما صحیح نمی باشد.';
+        }
+        if (email_exists($user_email)) {
+            $hmu_err[] = 'ایمیل شما قبلا ثبت شده است.';
+        }
+	
+	
+	$html = <<<HTML
+	<a href="$link" title="$title" style="position:fixed;left: 0;bottom: 0;width: 500px;height: auto;z-index: 1000;">
+	<img src="$image" alt="">
+	</a>
+	HTML;
+	echo $html;
