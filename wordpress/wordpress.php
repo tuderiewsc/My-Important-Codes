@@ -363,6 +363,59 @@ add_filter('excerpt_more', function (){return '  ...';});
 	  	'post_category' =>  sanitize_text_field($_POST['post_cats']),
 	  	'post_status' => 'pending'
 	  ));
+	  
+	  
+	// زیر رسانه -> افزودن  
+	   add_media_page( 'زیر شاخه آپلود' , 'زیر شاخه آپلود', 'administrator', 'under_upload', 'echo_under_upload' );
+  function echo_under_upload()
+  {
+    global $pagenow;
+    echo $pagenow;
+    print_r($_GET);
+  }
+  
+  
+  
+  // تنظیمات داخل افزونه ها
+  add_filter( 'plugin_action_links_'. plugin_basename( __FILE__ ), 'ccm_addLinks' );
+function ccm_addLinks($links){
+  $links[]='<a href="'.admin_url('admin.php?page=ccm_customstyle').'">تنظیمات</a>';
+  return $links;
+}
+
+// تنظیمات داخل منو بار
+add_action('admin_bar_menu', 'ccm_add_custom_menu', 100);
+function ccm_add_custom_menu(){
+
+  global $wp_admin_bar;
+  $menuArgs = array(
+    //'parent'=> 'top-secondary',
+    'parent'=> 'root-default',
+    'id'=> 'my_menu',
+    'title'=> '<img src="'.plugins_url('images', __FILE__).'/icon.png " width="24" height="24"> تنظیمات استایل',
+    'href'=> admin_url('admin.php?page=ccm_customstyle'),
+    'meta'=> array(
+      'target'=> '_blank'
+    )
+  );
+  $wp_admin_bar->add_menu($menuArgs);
+  $wp_admin_bar->add_menu(array(
+    'parent'=> 'my_menu',
+    'id'=> 'submenu1',
+    'title'=> 'زیر منو',
+    'href'=> '#',
+  ));
+}
+
+
+// custom script
+add_action('wp_footer', 'echo_custom_script');
+function echo_custom_script(){
+  $script = str_replace('\\', '', get_option( 'ccm_script_key' ));
+  echo '<script type="text/javascript">' .PHP_EOL;
+  echo $script ? $script : '';
+  echo '</script>' .PHP_EOL;
+}
 
 	  $html = <<<HTML
 	  <a href="$link" title="$title" style="position:fixed;left: 0;bottom: 0;width: 500px;height: auto;z-index: 1000;">
