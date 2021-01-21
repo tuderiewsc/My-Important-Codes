@@ -116,6 +116,10 @@ $(document).ready(function () {
 
   $.ajax({
     url: '/api/v1/users/forms/report',
+	headers:{
+       'Content-Type':'application/json'
+	},
+	//method: 'post',
     type: 'POST',
     data: { 'report_type':'shopSignup' ,'full_name':name+family ,'email':email ,'reason':link_phone_desc ,'shop_name':shop_name  },
     dataType: 'JSON',
@@ -631,3 +635,124 @@ var countDownDate = new Date("2021-07-20 23:59:59").getTime();
 // Countdown timer
 
 
+
+// Shamsi to Miladi
+//$("#test").text(moment().locale('fa').format('YYYY/M/D'));
+    $('#submit_btn').click(function (e) {
+        e.preventDefault();
+        var input_date = $('#form1').find('input#inputDate').val();
+        var input_time = $('#form1').find('input#inputTime').val();
+
+        var get_time = input_date + ' ' + input_time;
+        $('input[name=time]').val(toTimestamp(get_time));
+
+        if (isNaN(toTimestamp(input_date))){
+        var miladi = moment.from(fixNumbers(input_date), 'fa', 'YYYY/M/D').format('YYYY-M-D'); // 2013-8-25 16:40:00
+        var get_time = miladi + ' ' + input_time;
+        $('input[name=time]').val(toTimestamp(get_time));
+    }
+	
+	
+function toTimestamp(strDate){
+    var datum = Date.parse(strDate);
+    return datum/1000;
+}
+
+var
+persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
+arabicNumbers  = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
+fixNumbers = function (str)
+{
+    if(typeof str === 'string')
+    {
+        for(var i=0; i<10; i++)
+        {
+            str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
+        }
+    }
+    return str;
+};
+// Shamsi to Miladi
+
+
+var today = new Date();
+var current_time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+document.getElementById('inputTime').defaultValue=current_time;
+
+
+//Increment the idle time counter every minute.
+    var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+    //Zero the idle timer on mouse movement.
+    $(this).mousemove(function (e) {
+        idleTime = 0;
+    });
+    $(this).keypress(function (e) {
+        idleTime = 0;
+    });
+	
+	function timerIncrement() {
+    idleTime = idleTime + 1;
+    if (idleTime > 9) { // 10 minutes
+        window.location.reload();
+    }
+}
+
+
+if (confirm(msg)) {
+            window.location.replace(href);
+			//window.location.reload(true); //Reloads the current page from the server
+
+        }
+		
+		
+		
+		$.ajax({
+            url: url,
+            beforeSend: function () {
+                $('#customer_order_icon').css('display', 'inline-block').addClass('fa-spin');
+            },
+            success: function(data){
+            },
+            error: function (err) {
+            },
+            complete: function () {
+                $('#customer_order_icon').css('display', 'none').removeClass('fa-spin');
+            }
+        });
+		
+		
+		
+		function blink(){
+    $('.blink_icon').delay(500).fadeTo(100,0.5).delay(100).fadeTo(100,1, blink);
+		}
+	
+	
+	
+	$('.signup_frm').find('input#name').on('input', function () {
+    let value = $(this).val();
+    if (value === ''){
+        $(this).siblings('.invalid-feedback').css('display', 'block');
+        is_name_validate = false;
+    }else {
+        $(this).siblings('.invalid-feedback').css('display', 'none');
+        is_name_validate = true;
+    }
+    $(this).siblings('.notValid').css('display', 'none');
+    $('.signup_frm').change();
+});
+$('.signup_frm').on('change' , function () {
+    if (is_name_validate && is_shop_name_validate && is_shop_link_validate && is_phone_validate && is_email_validate){
+        $('#signup_frm_submit').attr('disabled' , false);
+    }else {
+        $('#signup_frm_submit').attr('disabled' , true);
+    }
+});
+
+    $(window).scroll(function(event) {
+        if ($(this).scrollTop() > 600) {
+            $('#scroll_to_top_btn').css('transform', 'translateX(125px) rotateZ(360deg)');
+		}
+	})
+	
+	
+	    $('select#report_type').on('click change', function() )

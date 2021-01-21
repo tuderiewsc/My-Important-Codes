@@ -302,3 +302,112 @@ Product.getProducts(function (err, products) {
   module.exports.getProducts = function(callback, limit){
   Product.find(callback).limit(limit);
 };
+
+function objectSize(obj) {
+        let size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    }
+    const query0 = {
+        text: 'select * from '+ PRODUCT_TABLE_NAME +' WHERE user_id=$1',
+        values: [req.user.id],
+    };
+    client.query(query0, (err, resp) => {
+        itemCount = objectSize(resp.rows);
+    });
+	
+	
+	
+	
+let paginate = require('express-paginate');
+let compression = require('compression');
+// Init App
+let app = express();
+// Paginate
+app.use(paginate.middleware(10, 50));
+// Optimization
+app.use(compression()); //Compress all routes
+
+
+  console.log(util.inspect(temp_images_array));
+
+<% if (pages){ %>
+<% pages.forEach( page => { %>
+	<li class="page-item <%= currentPage === page.number && 'active' %>">
+		<a href="<%= page.url %>" class="page-link"><%= page.number %></a>
+	</li>
+<% }) %>
+<% } %>
+
+      req.session.sessionFlash = {type: 'deleteSuccessMsg', message: '„Õ’Ê· Å«ò ‘œ.'};
+	  <% if ( sessionFlash && sessionFlash.type == 'logoutSuccess') { %>
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "md-toast-bottom-left",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": 300,
+                    "hideDuration": 1000,
+                    "timeOut": 5000,
+                    "extendedTimeOut": 1000,
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.info(deleteSuccessMsg);
+            });
+        </script>
+    <% } %>
+	
+	
+	    form.parse(req, function(err, fields, files) {
+        let partnumber = fields.partnumber;
+        let description = fields.description;
+        let detaileddescription = fields.detaileddescription;
+        const oldValues = new Object();
+        oldValues.partnumber = partnumber;
+        oldValues.description = description;
+		})
+
+
+            let fileType = getExtension(singleImg.originalFilename);
+
+  function readAndWriteImage(singleImg, newPath) {
+        fs.readFile(singleImg.path , function(err,data) {
+            fs.writeFile(newPath,data, function(err) {
+                if (err) console.log('ERRRRRR!! :'+err);
+            })
+        })
+    }
+	
+	function getExtension(filename) {
+        let ext = path.extname(filename||'').split('.');
+        return ext[ext.length - 1];
+    }
+    function isEmpty(obj) {
+        for(var key in obj) {
+            if(obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    }
+	
+	
+	
+	app.use('/dashboard' , requiresLogin , dashboardRouter);
+	// Middleware
+	module.exports = {
+    requiresLogin: (req, res, next) => {
+        if (req.user) return next();
+        //res.sendStatus(401);
+        res.redirect('/403');
+    },
+};

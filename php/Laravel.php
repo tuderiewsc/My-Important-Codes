@@ -401,3 +401,132 @@ public function uploadImage(Request $request)
     return redirect()->back();
 }
 /* Api */
+
+
+/* Constants */
+$redirect_url = Config::get('constants.redirect_url');
+//constants.php =>
+'redirect_url' => env('REDIRECT_URL','http://192.168.30.99/wordpress/wp-login.php?redirect_to=http://192.168.30.99/auth/public/'),
+/* Constants */
+
+
+public function changeLang(Request $request)
+	{
+		$lan = $request->lan;
+		session()->forget('lang');
+		if ($lan == 'fa'){
+			session()->put('lang', 0);
+			App::setLocale('fa');
+			echo 0;
+		}elseif($lan == 'en'){
+			session()->put('lang', 1);
+			App::setLocale('en');
+			echo 1;
+		}
+
+	}
+	
+	public function notif_bulk_status_read(Request $request)
+	{
+		$counter = 0;
+		$notifLength = 0;
+		foreach (json_decode($request->ids) as $data => $value)
+		{
+			$counter++;
+			$notif = Notification::find($value);
+			$notif->status = 'read';
+			$res = $notif->save();
+			if ($res){
+				$notifLength++;
+			}
+		}
+		if ($counter === $notifLength){
+			session()->flash('status_change_success');
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+	
+	
+	/* Auto Auth Middleware */
+	public function handle($request, Closure $next)
+	{
+
+		if (isset($_COOKIE['wordpress_8L25432ACC2D4A404E635266556A58CC'])){
+			$data = unserialize($_COOKIE['wordpress_8L25432ACC2D4A404E635266556A58CC'], ["allowed_classes" => false]);
+			$userId = $this->encrypt_decrypt('decrypt', $data['userId']);
+			$userRole = $this->encrypt_decrypt('decrypt', $data['userRole']);
+			$user = User::find($userId);
+			session()->put('laravel_auth_check', 1);
+			session()->put('user_role', $userRole);
+			session()->put('user', $user);
+		}else{
+			Auth::logout();
+			session()->forget('laravel_auth_check');
+			session()->forget('user_role');
+			session()->forget('user');
+		}
+
+		return $next($request);
+	}
+
+	function encrypt_decrypt($action, $string) {
+		$output = false;
+		$encrypt_method = "AES-256-CBC";
+		$secret_key = 'H+MbQeThWmYq3t6w9z$C&F)J@NcRfUjXn2r5u7x!A%D*G-KaPdSgVkYp3s6v9y/B';
+		$secret_iv = 'RfUjXn2r5u8x/A?D(G-KaPdSgVkYp3s6v9y$B&E)H@MbQeThWmZq4t7w!z%C*F-J';
+		$key = hash('sha256', $secret_key);
+		// iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+		$iv = substr(hash('sha256', $secret_iv), 0, 16);
+		if ( $action == 'encrypt' ) {
+			$output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+			$output = base64_encode($output);
+		} else if( $action == 'decrypt' ) {
+			$output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+		}
+		return $output;
+	}
+	/* Auto Auth Middleware */
+	
+	
+	  <meta name="csrf-token" content="{{ csrf_token() }}">
+	  $.ajax({
+			url: url,
+			type: 'POST',
+			data: { 'user_id': userId, '_token': $('meta[name="csrf-token"]').attr('content') },
+			dataType: 'JSON',
+			success: function (data) {
+				//console.log(data);
+			}, error:function (err) {
+				//console.log(err);
+			}
+		});
+		
+		
+	  <?php
+	//App::setLocale('fa');
+	$locale = App::getLocale();
+	?>
+  @if($locale=='fa')
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/style_rtl.css') }}" />
+  @elseif($locale=='en')
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/style_ltr.css') }}" />
+  @endif
+  
+  
+	  
+		
+		
+		
+	<form method="post" action="{{ route('customer_orders.update' , ['customer_order'=>$order->id]) }}" >
+      //@csrf
+	  {{csrf_field()}}
+      {{ method_field('PATCH') }}
+	  //{{method_field('delete')}}
+
+	
+	<p><span>{{ date('d/m/Y', strtotime($order_sendToAdmin_notif_date->created_at ))}}</span></p>
+
+		
+
