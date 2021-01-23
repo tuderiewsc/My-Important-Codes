@@ -417,9 +417,101 @@ function echo_custom_script(){
   echo '</script>' .PHP_EOL;
 }
 
+
+
+
+	$current_user_id = get_current_user_id();
+	$query = "SELECT COUNT(*) FROM {$table} WHERE to_user = {$current_user_id} AND is_read = 0";
+	$number_message = $wpdb->get_var( $query );
+	$hmum_admin_bar_menu_title = $number_message > 0 ? '<span style="color: red">' . $number_message . ' پیام جدید</span>' : 'پیام کاربران';
+	$admin_menu_bar->add_menu(array(
+			'id' => 'hmum-user-message',
+			'title' => $hmum_admin_bar_menu_title,
+			'href' => admin_url('admin.php?page=hmum_user_message_inbox'),
+		));
+		
+		
+		
+		
+		add_action('user_register', 'hmum_send_welcome_message_to_new_user');
+
+
+
+function hmum_get_user_ID ( $user_or_email ) {
+	
+	if ( is_email( $user_or_email ) ) {
+		return email_exists( $user_or_email ); //return user id if email exists and return false if email does not exists
+	} else {
+		if ( $user = get_user_by( 'login', $user_or_email ) ) {
+	        return $user->ID;
+	    }
+	}
+	return false;
+
+}
+function hmum_get_user_name ( $user_id ) {
+	if ( $user = get_user_by( 'id', $user_id ) ) {
+        return $user->user_login;
+    }
+}
+
+
+	$message_id_safe = absint($message_id);
+
+return jdate ( 'd F Y ساعت H:i:s', $date );
+
+
+
+function hmum_parse_date ( $date ) {
+
+	$diff = strtotime( current_time('mysql') ) - strtotime( $date );
+
+	if ( $diff < 60 ) {
+		return ' - ' . $diff . ' ثانیه پیش';
+	} else if ( $diff < 3600 ) {
+		return ' - ' . floor($diff/60) . ' دقیقه پیش';
+	} else if ( $diff < 86400 ) {
+		return ' - ' . floor( $diff / 3600 ) . ' ساعت پیش';
+	} else if ( $diff < 2592000 ) {
+		return ' - ' . floor( $diff / 86400 ) . ' روز پیش';
+	}
+	return '';
+}
+
+
+current_user_can( 'administrator' )
+
+
+$hmum_inbox_page_hook = add_menu_page (
+			'پیام کاربران',//Page <title>{$title}</title>
+			$hmum_main_menu_title,//Page Menu title
+			'read',//capability; this is capability for any user or subscriber
+			'hmum_user_message_inbox',//This is menu slug
+			function(){ include ( HMUM_ADMIN_VIEW_DIR . 'inbox.php' ); },//This view render inbox page in admin
+			HMUM_ADMIN_IMAGES_URL . 'email_icon.png',//Menu icon by 16px x 16px
+			'18.69'
+		);
+		
+		
+		 //Using jquery-ui slider
+        wp_enqueue_script('jquery');
+		wp_enqueue_script('jquery-ui-core');
+		wp_enqueue_script('jquery-ui-slider');
+
+
+<?php wp_nonce_field('hm-save-setting');?>
+
+
+
+
+
+
 	  $html = <<<HTML
 	  <a href="$link" title="$title" style="position:fixed;left: 0;bottom: 0;width: 500px;height: auto;z-index: 1000;">
 	  <img src="$image" alt="">
 	  </a>
 	  HTML;
 	  echo $html;
+	  
+	  
+	  
