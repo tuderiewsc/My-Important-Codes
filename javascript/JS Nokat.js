@@ -811,3 +811,126 @@ let myPromise = new Promise(function(resolve, reject) {
   function(error) {myDisplayer(error);}
 );
 // Promise
+
+
+
+
+delLink.onclick = function(){delPerson(event)}
+function delPerson(e)
+		{
+			var person = e.srcElement.parentNode.parentNode
+			document.getElementById('tblPersons').removeChild(person)
+		}
+
+
+function chkAll_click(chkAll)
+		{
+			var tbl = document.getElementById('tblPersons')
+			if(chkAll.checked)
+				for(var i=1;i<tbl.childNodes.length ; ++i)
+					tbl.childNodes[i].childNodes[0].childNodes[0].checked = "checked"
+			else
+				for(var i=1;i<tbl.childNodes.length ; ++i)
+					tbl.childNodes[i].childNodes[0].childNodes[0].checked = ""
+		}
+		
+		
+
+var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+ var win
+		function btnOpen_click()
+		{
+			win = window.open("" , "" , "_blank")
+		}
+		
+		function btnClose_click()
+		{
+			win.close()
+		}
+		
+		function btnMove_click()
+		{
+			win.moveTo(600,700)
+			win.focus()
+		}
+		
+		function btnResize_click()
+		{
+			win.resizeTo(800 , 100)
+			win.focus()
+		}
+		
+		
+				var t = setInterval(function(){timer()} , 1000)
+		function timer()
+		{
+			var d = new Date()
+			document.getElementById('timer').innerHTML = d.toLocaleTimeString()
+		}
+
+
+console.log(eval('2 + 2'));
+// expected output: 4
+
+
+<body onload="()" ondblclick="()" oncontextmenu="()"></body>
+
+document.getElementById("").firstChild.nextSibling.innerHTML=""
+
+
+
+<form name="myForm">
+<input type="text" name="name">
+</form>
+let name = document.forms['myForm']['name'].value;
+
+
+// Join two strings:
+var str1 = "Hello ";
+var str2 = "world!";
+var res = str1.concat(str2);
+
+
+
+$('#p1').append(link1,link2,link3)
+$('#p1').prepend(link1,link2,link3)
+
+
+$('#p1').load("test.txt span");
+$('#txtNum1 , #txtNum2').keyup(function(){}
+
+				var w = $('body').width()
+				var h = $('body').height()
+				$("#loginPanel").fadeIn().animate({ left : (w-300)/2 , top : (h-200)/2} , 400)
+
+
+				var fnCell = $('<td>'+$('#txtFName').val()+'</td>')
+				var lnCell = $('<td>'+$('#txtLName').val()+'</td>')
+				var opCell = $('<td><img src="delete.png" class="del" /></td>')
+				
+				var row = $('<tr></tr>')
+				row.append(fnCell , lnCell , opCell)
+
+
+
+$('.frm1').submit(function(){})
+$('.frm1').serialize()
+
+	let myObject = {};
+let tempArray = $('.frm1').serializeArray();
+$.each(tempArray , function(key,val){
+	myObject[key] = val
+})
+
+
+
+$('#box').scroll(function(){
+	let x = $(this).scrollTop();
+})
+
+
+var url = 'http://....'
+$.getJSON(url,function(data){
+	console.log(data)
+})
+

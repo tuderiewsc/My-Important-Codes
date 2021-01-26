@@ -1,0 +1,16 @@
+click,hover,mouse,focus,css,change,hide ->> 15
+parent,childern,find,siblings,next,first,eq,filter ->> 2
+effect,speed,fade,slide,animate ->> 3
+sethtml,value,text,prompt,append,after,attr,remove,empty,addclass ->> 4 
+ajax,load ->> 5
+popup window ->> 6
+toggle menu ->> 8
+يختن فرم در جدول ->> 9
+plugin making ->> 10
+JQuer-ui => accardion,autocomplete,checkbox,radio,button ->> 11
+JQuer-ui => drag ->> 12
+JQuer-ui => selectable,resizeable ->> 13
+JQuer-ui => sortable ->> 14
+selectors ->> 16
+JQuer-ui => dialog ->> 24
+JQuer-ui => ui effects ->> 25
