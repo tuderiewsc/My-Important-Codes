@@ -27,6 +27,9 @@ $(document).ready(function () {
       $('#sortByDropdownMenuButton').find('i').text('keyboard_arrow_down');
     }
   });
+  
+  
+
 
 
   $(".products_list").after($(`
@@ -756,3 +759,55 @@ $('.signup_frm').on('change' , function () {
 	
 	
 	    $('select#report_type').on('click change', function() )
+		
+		
+		
+		  <img src="Desert.jpg" class="small" onmousemove="showOriginalPhoto(event)" onmouseout="removeOriginalPhoto()" />
+			var img = e.srcElement
+			var origImg = document.createElement('img')
+			origImg.src = img.src
+			origImg.style.width = "600px"
+			origImg.style.height = "400px"
+			origImg.style.zIndex = "999"
+			origImg.style.position = "absolute"
+			origImg.style.left = e.clientX
+			origImg.style.top = e.clientY
+			origImg.id = "original"
+			document.body.appendChild(origImg);
+			document.body.removeChild(document.getElementById('original'))
+
+
+// Fetch
+fetch(url)
+    .then(response => {
+        // handle the response
+    })
+    .catch(error => {
+        // handle the error
+    });
+	
+	async function fetchText() {
+    let response = await fetch('/readme.txt');
+    let data = await response.text();
+	}
+// Fetch
+
+
+
+// Promise
+function myDisplayer(val) {
+  alert(val);
+}
+let myPromise = new Promise(function(resolve, reject) {
+  let x = 1;
+  
+  if (x == 0) {
+    resolve("OK");
+  } else {
+    reject("Error");
+  }
+}).then(
+  function(value) {myDisplayer(value);},
+  function(error) {myDisplayer(error);}
+);
+// Promise
