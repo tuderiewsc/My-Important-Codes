@@ -1,0 +1,1 @@
+<?php //index is golden

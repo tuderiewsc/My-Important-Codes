@@ -1,0 +1,15 @@
+.hmci-cource-detail div {
+    width: 44%;
+    float: left;
+    padding: 1%;
+}
+
+.hmci-cource-detail span {
+    color: #EF6666;
+    font-size: 18px;
+}
+
+.hmci-cource-detail li {
+    font-size: 15px;
+    color: #525151;
+}

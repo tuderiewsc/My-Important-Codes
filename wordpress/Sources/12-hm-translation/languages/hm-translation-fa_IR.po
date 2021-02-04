@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Translation\n"
+"POT-Creation-Date: 2015-12-28 01:34+0330\n"
+"PO-Revision-Date: 2015-12-28 01:34+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: hm-translation.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: hm-translation.php:19
+msgid "hamed"
+msgstr "حامد"
+
+#: hm-translation.php:19
+msgid "moodi"
+msgstr "مودی"
+
+#. Plugin Name of the plugin/theme
+msgid "Translation"
+msgstr "ترجمه"
+
+#. Plugin URI of the plugin/theme
+msgid "http://example.com/plugins/translations"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "this is my translation plugin description in this chapter"
+msgstr "این توضیحات این افزونه در این فصل"
+
+#. Author of the plugin/theme
+msgid "HamedMoodi"
+msgstr "حامد مودی"
+
+#. Author URI of the plugin/theme
+msgid "http://example.com/author/hamedmoodi"
+msgstr ""
+
+#~ msgid "One Post"
+#~ msgid_plural "More one"
+#~ msgstr[0] "پست"
+
+#~ msgctxt "verb"
+#~ msgid "post"
+#~ msgstr "پست کردن"
+
+#~ msgctxt "none"
+#~ msgid "post"
+#~ msgstr "پست"
+
+#~ msgid "Please fill text"
+#~ msgstr "لطفا متنی بنویسید."
+
+#~ msgid "I live in %1$s in %2$s"
+#~ msgstr "من در %2$s در شهر %1$s زندگی میکنم."
+
+#~ msgid "This is simple text."
+#~ msgstr "این یک متن ساده است."
+
+#~ msgid "I live in %s in Iran"
+#~ msgstr "من در %s در ایران زتدگی میکنم."

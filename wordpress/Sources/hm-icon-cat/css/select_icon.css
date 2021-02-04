@@ -1,0 +1,6 @@
+div#taxonomy-software img{
+    padding: 3px;
+}
+div#taxonomy-software img.selected{
+    background: red;
+}

@@ -1,0 +1,8 @@
+#hmpi-product-tab,
+#hmpi-product-tab input{
+	font-family: tahoma;
+}
+ul.hmpi-tabs li{
+	float: right !important;
+	font-family: tahoma;
+}

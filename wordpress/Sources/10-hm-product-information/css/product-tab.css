@@ -1,0 +1,55 @@
+div.hmpi-product-information{
+	background: white;
+	border: 1px solid gray;
+	border-radius: 2px;
+	padding: 5px;
+	margin: 10px 0;
+}
+
+.hmpi-product-information li{
+	display: inline-block;
+	margin: 2px;
+}
+
+.hmpi-product-information li a.tab_a{
+	padding: 3px 15px;
+	background: -webkit-linear-gradient(#54CC22, #00B51F);
+	background: -o-linear-gradient(#54CC22, #00B51F);
+	background: linear-gradient(#54CC22, #00B51F);
+	border-radius: 2px;
+	color: white;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.43);
+	font-size: 15px;
+	text-decoration: none;
+}
+
+.hmpi-product-information ul{
+	border-bottom: 1px solid #BDB8B8;
+	margin: 0;
+}
+
+.hmpi-product-information li.ui-tabs-active a.tab_a{
+	background: -webkit-linear-gradient(#22ADCC, #0083B5);
+	background: -o-linear-gradient(#22ADCC, #0083B5);
+	background: linear-gradient(#22ADCC, #0083B5);
+}
+
+.hmpi-product-information img{
+	display: inline-block;
+}
+
+.hmpi-product-information p{
+	text-align: justify;
+	padding: 10px;
+}
+
+#hmpi_image_gallery li{
+    display: inline-block;
+}
+
+#hmpi_image_gallery img{
+    width: 165px;
+    height: 115px;
+    /*border-radius: 3px;*/
+    /*border: 1px dashed #B1B1B1;*/
+}

@@ -3,7 +3,7 @@
 5  => related posts,custom filter
 6  => object oriention (Class)
 7  => first settings , add_menu
-9 , 10  => metabox in post editor
+9 , 10  => metabox in post editor , [media-upload', 'thickbox']
 11  => widget , metabox in dashboard
 13  => default wp settings
 14  => metabox settings

@@ -501,6 +501,23 @@ $hmum_inbox_page_hook = add_menu_page (
 
 <?php wp_nonce_field('hm-save-setting');?>
 
+    <input type="radio" <?php checked($hmci_cource_level, 'high'); ?> name="hmci_metabox_level" id="hmci_metabox_level_high" value="high"  />
+    <input type="checkbox" <?php checked($hmci_cource_free, 'free'); ?> value="free" name="hmci_metabox_free" id="hmci_metabox_free" />
+    <option value="fa" <?php selected($hmci_cource_lang, 'fa'); ?>>فارسی</option>
+
+
+
+add_action('save_post', 'hmci_course_information_save');
+add_action('save_edit', 'hmci_course_information_save');
+function hmci_course_information_save( $post_id ){
+
+    if ( !isset( $_POST['hmci_metabox_course_logo'] ) ) return;
+    
+    update_post_meta($post_id, '_hmci_course_logo', esc_url_raw( $_POST['hmci_metabox_course_logo'] ));
+}
+$hmci_cource_logo 	= get_post_meta( $post->ID, '_hmci_course_logo', true );
+
+
 
 
 

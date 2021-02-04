@@ -1,0 +1,48 @@
+/*This styles use for admin new message*/
+div.description {
+	border-radius: 3px;
+	padding: 10px;
+	border: 1px solid #D0D0D0;
+	background: #E8EAE7;
+	margin: 10px;
+}
+
+span.red {
+	color: red;
+}
+
+div.hmum_new input[type='text'] {
+	border-radius: 3px;
+	padding: 5px 10px;
+}
+
+div.hmum_new h2, div.hmum_inbox h2, div.hmum_setting h2 {
+	font-family: tahoma;
+}
+
+div.hmum-status-fail {
+	background-repeat: no-repeat;
+	background-position: right center;
+	padding: 10px 20px;
+	border: 1px solid #FF8585;
+	border-radius: 3px;
+	background-color: #FFD2D2;
+}
+
+div.hmum-status-success {
+	background-repeat: no-repeat;
+	background-position: right center;
+	padding: 10px 20px;
+	border: 1px solid #81E87A;
+	border-radius: 3px;
+	background-color: #D7FFD2;
+}
+/*Read message content*/
+.hmum_message_conversation {
+    border: 1px solid #79A6C5;
+    border-radius: 3px;
+    padding: 10px;
+    margin: 10px;
+    background: #9FD5FB;
+}
+

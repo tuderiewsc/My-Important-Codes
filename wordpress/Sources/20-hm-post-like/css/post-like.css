@@ -1,0 +1,16 @@
+#hmpl_like img{
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+}
+
+#hmpl_like span{
+    border: 1px solid #d4d4d4;
+    margin: 2px;
+    border-radius: 2px;
+    padding: 2px 5px;
+}
+
+#hmpl_like.disable{
+    opacity: .5;
+}

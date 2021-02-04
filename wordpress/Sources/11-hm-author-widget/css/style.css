@@ -1,0 +1,13 @@
+.hmaw-author-list{
+    border-radius: 2px;
+    border: 1px dashed #D2CFCF;
+    margin-top: 2px;
+}
+
+.hmaw-author-list img{
+    margin: 3px;
+    border-radius: 50%;
+    border: 1px dashed #797575;
+    width: 32px;
+    height: 32px;
+}

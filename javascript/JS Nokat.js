@@ -934,3 +934,42 @@ $.getJSON(url,function(data){
 	console.log(data)
 })
 
+
+
+// begin initialization
+        // preserve filters and options values on load
+        var initialParams = new window.URLSearchParams(window.location.search);
+        if (initialParams.has('filters')) {
+            const filters = JSON.parse(initialParams.get('filters'));
+
+            if (filters.site_id) {
+                $('#sitesFilterCheckBox-all').removeAttr('checked');
+                filters.site_id.split(',').forEach(site_id =>
+                    $(`#sitesFilterCheckBox-${site_id}`).attr('checked', true));
+            }
+
+            if (filters.native_attributes) {
+                if (filters.native_attributes.inStock) {
+                    $('#instock-input').attr('checked', true);
+                }
+
+                if (filters.native_attributes.price) {
+                    if (filters.native_attributes.price.min) {
+                        $('#min-price-input').val(filters.native_attributes.price.min);
+                    }
+
+                    if (filters.native_attributes.price.max) {
+                        $('#max-price-input').val(filters.native_attributes.price.max);
+                    }
+                }
+            }
+        }
+
+        if (initialParams.has('sort_by')) {
+            const sortCriteria = initialParams.get('sort_by');
+            $('.sort_btns').find('button.active').removeClass('active btn-primary').addClass('btn-light');
+            const $item = $(`.sort_btns > button.${sortCriteria || 'fresh'}`);
+            $item.addClass('active btn-primary').removeClass('btn-light');
+        }
+        // end of initialization
+
