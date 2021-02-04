@@ -520,6 +520,24 @@ $hmci_cource_logo 	= get_post_meta( $post->ID, '_hmci_course_logo', true );
 
 
 
+function __construct() {
+        parent::__construct(
+            'hmaw_author_widget',
+            'نویسندگان برتر',
+            array(
+                'description'   => 'نمایش نویسندگان برتر از نظر تعدا مطلب، سابقه،...',
+                'classname'     => 'hmaw_form_class'
+            )
+        );
+        if (is_active_widget(false, false, $this->id_base)) {
+
+            add_action('wp_enqueue_scripts', array(&$this, 'script'));
+
+            add_action('admin_enqueue_scripts', array(&$this, 'upload_sctipt'));
+
+        }
+    }
+
 
 
 
