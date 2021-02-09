@@ -540,6 +540,209 @@ function __construct() {
 
 
 
+add_action('plugins_loaded', function(){
+    load_plugin_textdomain('hm-digital-shop', false, basename(plugin_dir_path(__FILE__)) . '/languages/');
+});
+
+register_activation_hook(__FILE__, 'hmds_activation_func');
+function hmds_activation_func(){
+    global $wpdb;
+    
+    $table = $wpdb->prefix . 'digital_product';
+    $table2 = $wpdb->prefix . 'digital_product_transaction';
+    
+    $query1 = "CREATE TABLE `{$table}` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `title` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+    `price` int(11) DEFAULT '0',
+    `download_link` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+    `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+    PRIMARY KEY (`id`)
+   ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+    
+    $query2 = "CREATE TABLE `{$table2}` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `user` int(11) NOT NULL,
+        `file` int(11) NOT NULL,
+        `price` int(11) NOT NULL,
+        `res_number` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+        `ref_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+        `description` text COLLATE utf8_unicode_ci NOT NULL,
+        `paymenter` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+        `email` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+        `mobile` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+        `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+        PRIMARY KEY (`id`)
+       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+    
+    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+    dbDelta($query1);
+    dbDelta($query2);
+    
+}
+
+register_uninstall_hook(__FILE__, 'hmds_uninstall_func');
+function hmds_uninstall_func(){
+    global $wpdb;
+    
+    $table = $wpdb->prefix . 'digital_product';
+    $table2 = $wpdb->prefix . 'digital_product_transaction';
+    
+    $wpdb->query("DROP TABLE IF EXISTS $table");
+    $wpdb->query("DROP TABLE IF EXISTS $table2");
+}
+
+    <td>digital_product id=<?php echo absint($product->id) ;?></td>
+	
+	
+	function hmds_get_product( $product_id ) {
+    global $wpdb;
+    $table = $wpdb->prefix . 'digital_product';
+    return $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE id = %d", $product_id), OBJECT);
+}
+
+    return $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table WHERE file = %d AND user = %d AND ref_number <> 'null'", $prodcut_id, $user_id));
+
+$insertResult = $wpdb->insert($table, array(
+        'user'          => $user_id,
+        'file'          => $file_id,
+        'price'         => $price,
+        'res_number'    => $ResNumber,
+        'ref_number'    => 'null',
+        'description'   => $description,
+        'paymenter'     => $paymenter,
+        'email'         => $email,
+        'mobile'        => $mobile,
+        'create_time'   => current_time( 'mysql' ))
+        );
+    return $insertResult;
+	
+	
+	    return $wpdb->update($table, array('ref_number' => $RefNumber), array('res_number' => $ResNumber));
+
+
+        $ResNumber = uniqid() ;// Order Id In Your System
+        $Description = urlencode($product->title);
+
+
+		<tbody>
+            <?php hmds_get_products();?>
+        </tbody>
+		
+		
+$limit = 10; // number of rows in page
+$offset = ( $pagenum - 1 ) * $limit;
+$transactions = $wpdb->get_results( "SELECT * FROM $table LIMIT $offset, $limit" );
+
+//in jquery
+function update_products(){
+        $.get(hmds_data.ajaxurl + '?action=hmds_full_data', function(html){
+            $("table#hmds_data_table tbody").html(html);
+        });
+    }
+//	
+	
+	
+	wp_localize_script('hmds-script', 'hmds_data', array(
+        'ajaxurl'               => admin_url('admin-ajax.php'),
+        'hmds_wpnonce'          => wp_create_nonce('hmds_save_link'),
+        'hmds_wpnonce_delete'   => wp_create_nonce('hmds_delete_link'),
+        'sure'                  => __('Are you sure?', 'hm-digital-shop'),
+        'err'                   => __('An error happen', 'hm-digital-shop'),
+    ));
+	    $(document).on('click', 'a.hmds_delete', function(){
+        if(!confirm(hmds_data.sure)) return false;
+
+
+		extract(shortcode_atts(array(
+        'id' => 0
+    ), $atts));
+    $product = hmds_get_product( $id );
+		
+		
+		function hmbs_set_404(){
+    global $wp_query;
+    $wp_query->set_404();
+    status_header( 404 );
+    get_template_part( 404 );
+    exit;
+}
+$url = 'http://it-ebooks-api.info/v1/book/' . urlencode($book_id);
+    $result = wp_remote_get($url);
+    if (wp_remote_retrieve_response_code($result) != 200 ) {
+        hmbs_set_404();
+    }
+	
+	
+	//update_term_meta($term_id, $meta_key, $meta_value, $prev_value)
+function hmic_update_term_meta( $term_id, $meta_key, $meta_value ){
+    global $wp_version;
+    if(version_compare($wp_version, '4.4', '>=') ) {
+        return update_term_meta($term_id, $meta_key, $meta_value);
+    }else{
+        return update_option("taxonomy_{$term_id}_{$meta_key}", $meta_value);
+    }
+}
+
+
+//get_term_meta($term_id, $key, $single)
+function hmic_get_term_meta( $term_id, $key, $single ){
+    global $wp_version;
+    if (version_compare( $wp_version, '4.4', '>=') ) {
+        return get_term_meta($term_id, $key, $single);
+    }else{
+        return get_option("taxonomy_{$term_id}_{$key}", '');
+    }
+}
+
+//add column
+add_filter('manage_edit-software_columns', function( $columns ){
+    $columns['software_icon'] = 'آیکون نرم افزار';
+    return $columns;
+});
+
+//add column data
+add_filter('manage_software_custom_column', function( $out, $column_name, $term_id ){
+    
+    if($column_name == 'software_icon') {
+        $icon_url = hmic_get_term_meta($term_id, 'software_icon', true);
+        $out = '<img src="'. esc_url($icon_url).'" width="48" height="48"/>';
+    }
+    return $out;
+}, 10, 3);
+
+add_filter('manage_post_posts_columns', function($columns){
+    $columns['software_icon'] = 'نرم افزار';
+    return $columns;
+});
+
+add_filter('manage_post_posts_custom_column', function($column_name, $post_id){
+    if( $column_name == 'software_icon' ){
+        $term_ids = wp_get_object_terms($post_id, 'software', array('fields' => 'ids'));
+        $term_id = isset($term_ids[0]) ? $term_ids[0] : 0;
+        if($term_id) {
+            $term = get_term($term_id);
+            $icon_url = hmic_get_term_meta($term_id, 'software_icon', true);
+            echo '<img title="'. $term->name .'|'.$term->description.'" width="32" height="32" src="' . esc_url($icon_url) . '"/>';
+        }else{
+            echo '<img width="32" height="32" src="' . HMIC_NO_ICON_URL . '"/>';
+        }
+    }
+}, 10, 2);
+
+
+add_action('admin_enqueue_scripts', function($hook){
+    if( $hook == 'edit-tags.php' && $_GET['taxonomy'] == 'software' ){
+        wp_enqueue_script('hmic-select-icon', plugin_dir_url(__FILE__) . 'js/select_icon.js', array('jquery', 'media-upload', 'thickbox'));
+        wp_enqueue_style('thickbox');
+    }
+    if( $hook == 'post.php' || $hook == 'post-new.php' ){
+        wp_enqueue_style('hmic-select-icon-post', plugin_dir_url(__FILE__) . 'css/select_icon.css');
+        wp_enqueue_script('hmic-select-icon-post', plugin_dir_url(__FILE__) . 'js/select_icon.js');
+    }
+//wp_die($hook);
+});
+		
 
 	  $html = <<<HTML
 	  <a href="$link" title="$title" style="position:fixed;left: 0;bottom: 0;width: 500px;height: auto;z-index: 1000;">

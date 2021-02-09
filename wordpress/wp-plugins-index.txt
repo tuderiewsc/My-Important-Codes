@@ -12,4 +12,11 @@
 17  => custom roles 
 19  => add button to text editor
 20  => like posts
+21  => Everything , Sendemail , Parspal Payment , table paginate
 22,23  => cron job
+24  => add_rewrite_rule , query params
+27  => ÇØáÇÚÇÊ ÇÖÇÝí ˜ÇÑÈÑ
+30  => add taxonomy with icon , add column
+32  => post type , add taxonomy
+
+31  => Full(publish plugin) , make shortcode for each slider
