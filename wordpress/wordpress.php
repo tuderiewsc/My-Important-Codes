@@ -600,6 +600,8 @@ function hmds_uninstall_func(){
     $table = $wpdb->prefix . 'digital_product';
     return $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE id = %d", $product_id), OBJECT);
 }
+        $result = $wpdb->get_col("SELECT * FROM {$hmei_table}", 9);
+
 
     return $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table WHERE file = %d AND user = %d AND ref_number <> 'null'", $prodcut_id, $user_id));
 
