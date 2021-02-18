@@ -1,0 +1,119 @@
+git --version 
+
+git init
+
+git status
+
+git add .     =>         اضافه کردن همه فايل ها به استيج - tracking
+
+git commit -m "commit_name"     =>         ثبت تغييرات
+git commit a-m "commit_name"    
+
+git config --global user.name Ali   =>     تغيير مشخصات
+git config --global user.email email@email.com   =>     تغيير مشخصات
+
+git config --list   =>     ليست مشخصات
+
+git log
+git log -n 1  =>    نمايش آخرين لاگ
+git log --since="2019-01-02"  
+git log --until="2019-01-02"  
+git log --author="ali"  
+git log --oneline =>   نمايش در يک خط
+
+
+git diff =>   نمايش تفاوت ها
+git diff --staged
+git diff index.html
+
+
+git checkout -- index.html  =>  
+git checkout "commit_id" -- index.html  => undo from specific commit
+git revert "commit_id"     =>         Undo
+
+
+git reset HAED
+git reset HAED index.html
+git reset index.html => biroon keshidane file az stage
+git reset --hard HAED 
+git show HEAD
+
+git commit -m "commit_name" --amend     =>         edit last commit
+
+git reset --soft "commit_id"    => delete commits after "commit_id"
+git reset --mixed "commit_id"    
+git reset --hard "commit_id"   
+
+ 
+git clean -n => delete untracked files    
+git clean -i => delete untracked files    
+git clean -f => delete untracked files  
+
+git rm "filename"  => delete file from git & filesystem  
+
+
+------------------------------------------------------
+Remote
+------------------------------------------------------
+type .git\config
+git push -u origin master
+git push 
+git fetch 
+git remote add origin "url"
+git remote -v
+git pull
+git branch --set-upstream-to=origin/master
+
+git clone "url"
+
+git branch  => Show branches
+git branch  "branch_name"
+git branch  -d "branch_name"  => delete branch
+git branch  -r
+git branch  -a
+git checkout  "branch_name"  => switch to branch
+git checkout -b "branch_name"  => make & switch to branch
+git diff "branch_name1".."branch_name2"  
+
+git push -u origin "branch_name"  =>  push a branch
+
+git branch  --merged
+git merge
+git merge  "branch_name"
+git merge --no--ff  "branch_name"
+
+git stash save "commit_name"  => zakhireye filehaye unstage besoorate temp baraye clean negah dashtane WD , 
+(ghabl az push,pull va ...)
+git stash list
+git stash show stash@{0}
+git stash show -p stash@{0}
+git stash apply stash@{0} => bargardandan  filehaye unstage be WD
+git stash drop stash@{0}
+git stash clear
+
+
+------------------------------------------
+=========== git & python ===========
+pip install virtualenv
+py-3 -m virtualenv venv
+
+(venv)
+pip install flask
+set FLASK_APP = main.py
+set FLASK_ENV = development
+----------------------------
+git checkout master
+git pull
+git checkout "branchname"
+git merge master
+git add . , commit ,...
+git push 
+or
+git push -u origin head 
+------------------------------------------
+
+git pull origin master
+
+
+
+
