@@ -745,6 +745,25 @@ add_action('admin_enqueue_scripts', function($hook){
 //wp_die($hook);
 });
 		
+		
+		function add_async_forscript($url)
+{
+	if (strpos($url, '#asyncload')===false)
+		return $url;
+	else if (is_admin())
+		return str_replace('#asyncload', '', $url);
+	else
+		return str_replace('#asyncload', '', $url)."' async='async" ."' defer='defer";
+}
+add_filter('clean_url', 'add_async_forscript', 11, 1);
+// load css&js
+add_action( 'wp_enqueue_scripts', function(){
+	wp_enqueue_script('myScripts', RAD_JS.'scripts.js#asyncload' , '1.3');
+});
+
+// load css&js
+
+		
 
 	  $html = <<<HTML
 	  <a href="$link" title="$title" style="position:fixed;left: 0;bottom: 0;width: 500px;height: auto;z-index: 1000;">
