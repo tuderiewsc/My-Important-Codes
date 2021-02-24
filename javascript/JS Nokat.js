@@ -979,4 +979,9 @@ $.getJSON(url,function(data){
        $(this).next().slideDown(2000).end().hide(1000);
        return false;
    }); 
+   
+   
+     $('[data-toggle="tooltip"]').tooltip({
+        delay: {"show": 300, "hide": 100}
+    });
 
