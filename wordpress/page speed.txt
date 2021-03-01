@@ -1,0 +1,9 @@
+========== Done ==========
+https://wp-rocket.me/blog/critical-css/
+https://wp-rocket.me/blog/recommendations-pagespeed/
+https://web.dev/render-blocking-resources/?utm_source=lighthouse&utm_medium=unknown
+https://web.dev/font-display/?utm_source=lighthouse&utm_medium=unknown
+https://web.dev/font-display/?utm_source=lighthouse&utm_medium=unknown
+
+========== Not Done ==========
+https://web.dev/render-blocking-resources/
