@@ -984,4 +984,24 @@ $.getJSON(url,function(data){
      $('[data-toggle="tooltip"]').tooltip({
         delay: {"show": 300, "hide": 100}
     });
+	
+	
+	
+	// mark.js
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
+        
+		const searchQuery = <%- JSON.stringify(search_query) %>;
+        let markdown_options = {
+            "wildcards": "enabled",
+            "noMatch": function(term){
+                // term is the not found term
+            },
+            "done": function(counter){
+                // counter is a counter indicating the total number of all marks
+            },
+            "debug": false,
+            "log": window.console
+        };
+        $(".products_cards").mark(searchQuery , markdown_options);
+	// mark.js
 
