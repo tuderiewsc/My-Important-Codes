@@ -933,6 +933,11 @@ function hmum_parse_date ( $date ) {
 }
 
 
+if (strpos($notice['notice'] , 'به سبد خرید شما افزوده شد') !== false){
+	        ?><p class="m-0 text-center"><a class="open_cart" href="https://radshid.com/cart" target="_blank">مشاهده سبد خرید</a></p><?php
+        }
+
+
 
 	  $html = <<<HTML
 	  <a href="$link" title="$title" style="position:fixed;left: 0;bottom: 0;width: 500px;height: auto;z-index: 1000;">
