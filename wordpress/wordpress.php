@@ -908,6 +908,30 @@ function hmum_new_page_styles() {
 	});
 }
 
+function hmum_convert_date ( $date ) {
+
+	if ( function_exists( 'jdate' ) ) {
+		return jdate ( 'd F Y ساعت H:i:s', $date );
+	}
+
+}
+
+function hmum_parse_date ( $date ) {
+
+	$diff = strtotime( current_time('mysql') ) - strtotime( $date );
+
+	if ( $diff < 60 ) {
+		return ' - ' . $diff . ' ثانیه پیش';
+	} else if ( $diff < 3600 ) {
+		return ' - ' . floor($diff/60) . ' دقیقه پیش';
+	} else if ( $diff < 86400 ) {
+		return ' - ' . floor( $diff / 3600 ) . ' ساعت پیش';
+	} else if ( $diff < 2592000 ) {
+		return ' - ' . floor( $diff / 86400 ) . ' روز پیش';
+	}
+	return '';
+}
+
 
 
 	  $html = <<<HTML
