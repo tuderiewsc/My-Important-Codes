@@ -864,6 +864,52 @@ add_filter( 'woocommerce_structured_data_product', 'custom_woocommerce_structure
 
 
 
+	$hmum_inbox_page_hook = add_menu_page (
+			'پیام کاربران',//Page <title>{$title}</title>
+			$hmum_main_menu_title,//Page Menu title
+			'read',//capability; this is capability for any user or subscriber
+			'hmum_user_message_inbox',//This is menu slug
+			function(){ include ( HMUM_ADMIN_VIEW_DIR . 'inbox.php' ); },//This view render inbox page in admin
+			HMUM_ADMIN_IMAGES_URL . 'email_icon.png',//Menu icon by 16px x 16px
+			'18.69'
+		);
+
+	$hmum_sent_page_hook = add_submenu_page (
+			'hmum_user_message_inbox',//Page <title>{$title}</title>
+			'پیام های ارسال شده',//Page Menu title
+			'پیام های ارسال شده',//capability; this is capability for any user or subscriber
+			'read',//This is menu slug
+			'hmum_user_message_sent',
+			function(){ include ( HMUM_ADMIN_VIEW_DIR . 'inbox.php' ); }//This view render inbox page in admin
+		);
+
+	add_action("load-{$hmum_sent_page_hook}", 'hmum_new_page_styles');
+	add_action("load-{$hmum_inbox_page_hook}", 'hmum_new_page_styles');
+}
+
+function hmum_new_page_styles() {
+
+	add_action ('admin_enqueue_scripts', function(){
+		wp_enqueue_style ( 'admin-new-message', HMUM_ADMIN_CSS_URL . 'new.css' );
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( 'color-picker-script',HMUM_ADMIN_JS_URL . 'color-picker-script.js', array( 'jquery', 'wp-color-picker', 'jquery-ui-core', 'jquery-ui-slider' ), false, true );
+	});
+
+	add_action ('admin_print_styles', function(){
+		$mainBackground = HMUM_ADMIN_IMAGES_URL . 'communication.png';
+		echo "
+		<style type='text/css'>
+		.wrap.hmum_new {
+			background: url({$mainBackground}) no-repeat left bottom;
+		}
+		</style>
+		";
+
+	});
+}
+
+
+
 	  $html = <<<HTML
 	  <a href="$link" title="$title" style="position:fixed;left: 0;bottom: 0;width: 500px;height: auto;z-index: 1000;">
 	  <img src="$image" alt="">
