@@ -1005,3 +1005,12 @@ $.getJSON(url,function(data){
         $(".products_cards").mark(searchQuery , markdown_options);
 	// mark.js
 
+
+// using $(window).on("load") & (document).ready 
+(function($) {
+       // codes
+        $(window).on("load", function() { /*...*/ });
+    })(jQuery);
+    jQuery(document).ready(function($){
+		// codes
+    });
